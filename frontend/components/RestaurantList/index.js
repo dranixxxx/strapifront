@@ -29,7 +29,7 @@ const QUERY = gql`
 `;
 //const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"
 
-function RestaurantList(props) {
+function restaurantlist(props) {
     const { loading, error, data } = useQuery(QUERY);
 
     if (error) return "Error loading restaurants";
