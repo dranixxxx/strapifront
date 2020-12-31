@@ -3,10 +3,11 @@
 import { HttpLink } from "apollo-link-http";
 import { withData } from "next-apollo";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://strapipush.herokuapp.com"
 
 const config = {
         link: new HttpLink({
-                uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`, // Server URL (must be absolute)
+                uri: `${API_URL}/graphql`, // Server URL (must be absolute)
         })
 };
 export default withData(config);
