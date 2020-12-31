@@ -1,4 +1,4 @@
-/* components/RestaurantList/index.js */
+/* components/restaurantlist/index.js */
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
