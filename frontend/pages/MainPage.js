@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Container,Col, Input, InputGroup, InputGroupAddon, Row } from "reactstrap";
-import RestaurantList from "../components/RestaurantList";
+import RestaurantList from "../components/restaurantList";
 
 
 

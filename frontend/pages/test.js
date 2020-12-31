@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col,Container,Table } from 'reactstrap';
 import classnames from 'classnames';
-import Teacher from "../components/Account/Teacher";
-import Student from "../components/Account/Student";
+import Teacher from "../components/account/Teacher";
+import Student from "../components/account/Student";
 import Switchh from "../components/Switchh";
 function test()  {
   const [activeTab, setActiveTab] = useState('1');
