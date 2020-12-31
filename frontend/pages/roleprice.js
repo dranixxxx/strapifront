@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from "next/link";
 import Register from "../pages/register";
-import Cart from "../components/cart";
+// import Cart from "../components/cart";
 
 import {
     Card,
@@ -128,7 +128,7 @@ function getStepContent(stepIndex) {
             case 1:
                 return (<Register/>);
             case 2:
-                return (<Cart/>);
+                return '(<Cart/>)';
             case 3:
                 return 'Review';
             default:

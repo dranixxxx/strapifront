@@ -3,10 +3,6 @@ import { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
 import { gql } from "apollo-boost";
-
-
-
-import Cart from "../components/cart/";
 import AppContext from "../context/AppContext";
 
 import {
@@ -53,7 +49,6 @@ function Restaurants() {
         const { restaurant } = data;
         return (
             <>
-            <aside style={{float:"right"}}><Cart /></aside>
             <Container>
             <h1>{restaurant.name}</h1>
             <Row>
