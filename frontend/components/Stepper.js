@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from "next/link";
 import Register from "../pages/register";
+import Cart from "../components/cart";
 
 const useStyles = makeStyles((theme) => ({
   root: {

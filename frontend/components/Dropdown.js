@@ -10,7 +10,7 @@ const Dropdownn = (props) => {
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} >
       <DropdownToggle caret color="light">
-        Dropdown
+        Solution
         </DropdownToggle>
       <DropdownMenu>
 

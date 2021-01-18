@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Container, Nav, NavItem } from "reactstrap";
 import { logout } from "../lib/auth";
 import AppContext from "../context/AppContext";
+import Popoverr from "../components/Popover";
 import Footer from "../components/Footer";
 import Dropdown from "../components/Dropdown";
 
@@ -58,6 +59,7 @@ const Layout = (props) => {
 
 
         <NavItem className="ml-auto">
+            {/*<Popoverr/>*/}
         </NavItem>
         <NavItem>
         {user ? (

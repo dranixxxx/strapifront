@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import AppContext from "../../context/AppContext";
@@ -14,6 +14,7 @@ import {
     Row,
 } from "reactstrap";
 import Link from "next/link";
+import Switch from "@material-ui/core/Switch";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"
 const GET_TK = gql`
@@ -33,6 +34,17 @@ const GET_TK = gql`
 `;
 
 function Student(props){
+    //check
+    const [check, setCheck] = React.useState({
+    checked: false,
+
+  });
+
+  const handleChange = (event) => {
+    setCheck({ ...check, [event.target.name]: event.target.checked });
+  };
+
+    //else
     const appContext = useContext(AppContext);
     const { loading, error, data } = useQuery(GET_TK);
     if (error) return "Error loading";
@@ -41,7 +53,12 @@ function Student(props){
         <>
 
             <Container>
-
+            <Switch
+                checked={check.checked}
+                onChange={handleChange}
+                name="checked"
+            />
+            <p>asd <b>{check.checked ? "on" : "off"}</b></p>
             <h1>{data.role.name}</h1>
             <Row>
                 <Col xs="6" sm="3" style={{ padding: 0 }} >

@@ -6,11 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from "next/link";
 import Register from "../pages/register";
-// import Cart from "../components/cart";
+import Cart from "../components/cart";
 
 import {
     Card,
@@ -20,9 +20,27 @@ import {
     Col,
     Row,
     Container, InputGroup, Input,
+    Button,
+    Form, FormGroup, Label,
 } from "reactstrap";
 import {useRouter} from "next/router";
 
+  const GET_TK = gql`
+    
+    query($id: ID!) {
+        roleprice(id: $id) {
+          id
+          name
+          description
+          price
+          discounts{
+             id
+             name
+             discount
+          }
+        }
+    }
+`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,110 +55,229 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-    // const appContext = useContext(AppContext);
+
 
 
 function getSteps() {
   return ['Configure products', 'Create account', 'Payment', 'Review'];
 }
 
-function getStepContent(stepIndex) {
-  const GET_TK = gql`
-    
-    query($id: ID!) {
-        roleprice(id: $id) {
-          id
-          name
-          description
-          price
-          discounts{
-             name
-             discount
-          }
-        }
-    }
-`;
 
-    const router = useRouter();
+function roleprice(){
+    const appContext = useContext(AppContext);
+    const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "" });
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [pSelected, setPSelected] = React.useState(null);
+    const classes = useStyles();
+    var monthly = pSelected/10;
+    var annual = pSelected/10* 0.8;
+
+    const steps = getSteps();
+        const router = useRouter();
     const { loading, error, data } = useQuery(GET_TK, {
         variables: { id: router.query.id },
     });
-    if (error) return "Error loading";
-    if (loading) return <h1>Fetching</h1>;
-    if (data.roleprice) {
-        const {roleprice} = data;
+
+function getStepContent(stepIndex) {
 
         switch (stepIndex) {
             case 0:
+
+                if (error) return "Error loading";
+                if (loading) return <h1>Fetching</h1>;
+                if (data.roleprice) {
+                    const {roleprice} = data;
                 return (
 
                     <>
                         <Container>
                             <h1>{roleprice.name}</h1>
                             {/*<Steppper/>*/}
-                            <h3>How many meeting licenses do you want to purchase?</h3>
+                            <h3>1. How many meeting licenses do you want to purchase?</h3>
                             <InputGroup style={{width: "300px"}}>
                                 <Input placeholder="1" min={1} max={100} type="number" step="1"/>
                             </InputGroup>
-                            <h3>Choose plan</h3>
+                            <h3>2. Choose plan</h3>
                             <Row>
                                 {roleprice.discounts.map((res) => (
                                     <Col sm="3" key={res.id}>
                                         <Card>
+                                            <Button color="primary" onClick={() => setPSelected(roleprice.price * res.discount)} active={pSelected === roleprice.price * res.discount}>
                                             <CardBody>
                                                 <CardTitle><h3>{res.name}</h3></CardTitle>
                                                 <CardText>{roleprice.price * res.discount}</CardText>
                                             </CardBody>
-
+                                            </Button>
                                         </Card>
                                     </Col>
                                 ))}
 
                             </Row>
 
-                            <h3>Choose cycle</h3>
+                            <h3>3. Choose cycle</h3>
                             <Row>
                                 <Col sm="3">
                                     <Card>
-                                        <CardBody>
+
+                                        <Button outline color="primary" value={cartdata.price}
+                                            onClick={() => {
+                                              const val = monthly;
+                                              setcart((prevState) => {
+                                                return { ...prevState, price: val, name: "monthly" };
+                                              });
+                                            }}>
+                                            <CardBody>
                                             <CardTitle><h3>monthly</h3></CardTitle>
-                                            <CardText>${roleprice.price / 10}/month/license</CardText>
-                                        </CardBody>
+                                            <CardText>${monthly}/month/license</CardText>
+                                            </CardBody>
+                                        </Button>
                                     </Card>
                                 </Col>
                                 <Col sm="3">
                                     <Card>
+                                        <Button outline color="primary" value={cartdata.price}
+                                            onClick={() => {
+                                              const val = annual;
+                                              setcart((prevState) => {
+                                                return { ...prevState, price: val, name: "annual" };
+                                              });
+                                            }}>
                                         <CardBody>
                                             <CardTitle><h3>annual</h3></CardTitle>
-                                            <CardText>${roleprice.price / 10 * 0.8}/month/license</CardText>
+                                            <CardText>${annual}/month/license</CardText>
                                         </CardBody>
-
+                                        </Button>
                                     </Card>
                                 </Col>
                             </Row>
-
+                            <p>Selected: {pSelected}</p>
+                            <p>Selected: {cartdata.price}</p>
 
                             <br/>
                         </Container>
                     </>
-
-                );
+                )};
             case 1:
                 return (<Register/>);
             case 2:
-                return '(<Cart/>)';
+                return (
+                    <Col sm="12" md={{ size: 5, offset: 3 }}>
+                        <Form>
+                            <div><h3>1. Billing contact</h3></div>
+                          <FormGroup>
+                            <Label for="firstname">First Name</Label>
+                            <Input
+                                type="text"
+                                value={cartdata.firstname}
+                                placeholder="Enter a message"
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setcart((prevState) => {
+                                    return { ...prevState, firstname: val };
+                                    // return Object.assign({}, prevState, { message: val }); // Also works
+                                  });
+                                }}
+                              />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="lastname">Last Name</Label>
+                            <Input
+                                type="text"
+                                value={cartdata.lastname}
+                                placeholder="Enter a message"
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setcart((prevState) => {
+                                    return { ...prevState, lastname: val };
+                                    // return Object.assign({}, prevState, { message: val }); // Also works
+                                  });
+                                }}
+                              />
+                          </FormGroup>
+                          <FormGroup>
+                            <Label for="exampleEmail">Email</Label>
+                            <Input
+                                type="email"
+                                value={cartdata.email}
+                                placeholder="Enter a message"
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setcart((prevState) => {
+                                    return { ...prevState, email: val };
+                                    // return Object.assign({}, prevState, { message: val }); // Also works
+                                  });
+                                }}
+                              />
+                          </FormGroup>
+                            <FormGroup>
+                            <Label for="examplePassword">Company/Organization Name</Label>
+                            <Input type="email" name="password" id="examplePassword" />
+                          </FormGroup>
+                            <FormGroup>
+                            <Label for="examplePassword">Address</Label>
+                            <Input type="email" name="password" id="examplePassword" />
+                          </FormGroup>
+                            <FormGroup>
+                            <Label for="examplePassword">City</Label>
+                            <Input
+                                type="text"
+                                value={cartdata.city}
+                                placeholder="Enter a message"
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setcart((prevState) => {
+                                    return { ...prevState, city: val };
+                                    // return Object.assign({}, prevState, { message: val }); // Also works
+                                  });
+                                }}
+                              />
+                          </FormGroup>
+                            <FormGroup>
+                            <Label for="examplePassword">State</Label>
+                            <Input
+                                type="text"
+                                value={cartdata.state}
+                                placeholder="Enter a message"
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setcart((prevState) => {
+                                    return { ...prevState, state: val };
+                                    // return Object.assign({}, prevState, { message: val }); // Also works
+                                  });
+                                }}
+                              />
+                          </FormGroup>
+                            <div><h3>2. Payment Method</h3></div>
+                          <FormGroup>
+                            <Label for="exampleSelect">Select Bank</Label>
+                            <Input type="select" name="select" id="exampleSelect">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </Input>
+                          </FormGroup>
+                        </Form>
+                    </Col>);
             case 3:
-                return 'Review';
+                return(
+                    <div>
+                    <h1>{data.roleprice.price}</h1>
+                    <h1>{cartdata.firstname}</h1>
+                    <h1>{cartdata.lastname}</h1>
+                    <h1>{cartdata.email}</h1>
+                    <h1>{cartdata.city}</h1>
+                    <h1>{cartdata.state}</h1>
+                        <br/>
+                    <h1>{cartdata.price}</h1>
+                    <h1>{cartdata.name}</h1>
+                    </div>
+                ) ;
             default:
                 return history.back();
         }
-    }
 }
-
-function roleprice(props){
-    const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -150,9 +287,6 @@ function roleprice(props){
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
 
   return (
     <div className={classes.root}>
@@ -167,7 +301,11 @@ function roleprice(props){
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>All steps completed</Typography>
-            <Link href="/checkout"><Button> Checkout</Button></Link>
+            <Link href="/checkout"><Button
+                outline
+                color="primary"
+                onClick={() => appContext.addItem(cartdata)}>
+                Checkout</Button></Link>
           </div>
         ) : (
           <div>
