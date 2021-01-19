@@ -3,7 +3,7 @@
 import { HttpLink } from "apollo-link-http";
 import { withData } from "next-apollo";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://strapipush.herokuapp.com"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://45.64.126.93:1337"
 
 const config = {
         link: new HttpLink({
