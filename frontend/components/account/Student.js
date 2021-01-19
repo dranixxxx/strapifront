@@ -16,7 +16,7 @@ import {
 import Link from "next/link";
 import Switch from "@material-ui/core/Switch";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://45.64.126.93:1337/"
 const GET_TK = gql`
     {
     role (id: 2){

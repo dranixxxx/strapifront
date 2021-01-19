@@ -27,7 +27,7 @@ const QUERY = gql`
     }
   }
 `;
-//const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://45.64.126.93:1337"
 
 function RestaurantList(props) {
     const { loading, error, data } = useQuery(QUERY);
@@ -51,8 +51,7 @@ function RestaurantList(props) {
                                 <CardImg
                                 top={true}
                                 style={{ height: 250 }}
-                                src={ process.env.NODE_ENV === "production"
-                                        ? res.image.url : `${process.env.NEXT_PUBLIC_API_URL}${res.image.url}`}
+                                src={`${API_URL}${res.image[0].url}`}
                                 />
                                 <CardBody>
                                     <CardTitle><h1>{res.name}</h1></CardTitle>
