@@ -44,7 +44,7 @@ function Teacher(props){
             <Row>
             {data.role.roleprices.map((res) => (
                     <Col xs="6" sm="3" style={{ padding: 0 }} key={res.id}>
-            <Card style={{ height: "350px" }}>
+            <Card style={{ height: "600px" }}>
         {/*<h1>{res.name}</h1>*/}
         <CardBody>
             <CardTitle><h6>{res.name}</h6></CardTitle>

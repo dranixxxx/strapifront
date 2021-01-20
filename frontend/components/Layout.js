@@ -13,7 +13,6 @@ import Dropdown from "../components/Dropdown";
 const Layout = (props) => {
     const title = "Welcome to Nextjs";
     const { user, setUser } = useContext(AppContext);
-
     return (
         <div>
         <Head>

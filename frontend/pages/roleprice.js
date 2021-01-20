@@ -68,6 +68,7 @@ function roleprice(){
     const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "" });
     const [activeStep, setActiveStep] = React.useState(0);
     const [pSelected, setPSelected] = React.useState(null);
+    const [cSelected, setcSelected] = React.useState(null);
     const classes = useStyles();
     var monthly = pSelected/10;
     var annual = pSelected/10* 0.8;
@@ -77,7 +78,7 @@ function roleprice(){
     const { loading, error, data } = useQuery(GET_TK, {
         variables: { id: router.query.id },
     });
-
+    const { user, setUser } = useContext(AppContext);
 function getStepContent(stepIndex) {
 
         switch (stepIndex) {
@@ -102,7 +103,7 @@ function getStepContent(stepIndex) {
                                 {roleprice.discounts.map((res) => (
                                     <Col sm="3" key={res.id}>
                                         <Card>
-                                            <Button color="primary" onClick={() => setPSelected(roleprice.price * res.discount)} active={pSelected === roleprice.price * res.discount}>
+                                            <Button outline color="primary" onClick={() => setPSelected(roleprice.price * res.discount)} active={pSelected === roleprice.price * res.discount}>
                                             <CardBody>
                                                 <CardTitle><h3>{res.name}</h3></CardTitle>
                                                 <CardText>{roleprice.price * res.discount}</CardText>
@@ -121,11 +122,14 @@ function getStepContent(stepIndex) {
 
                                         <Button outline color="primary" value={cartdata.price}
                                             onClick={() => {
+                                              setcSelected(1)
                                               const val = monthly;
                                               setcart((prevState) => {
                                                 return { ...prevState, price: val, name: "monthly" };
                                               });
-                                            }}>
+                                            }}
+                                            active={cSelected === 1}
+                                            >
                                             <CardBody>
                                             <CardTitle><h3>monthly</h3></CardTitle>
                                             <CardText>${monthly}/month/license</CardText>
@@ -137,11 +141,14 @@ function getStepContent(stepIndex) {
                                     <Card>
                                         <Button outline color="primary" value={cartdata.price}
                                             onClick={() => {
+                                              setcSelected(2)
                                               const val = annual;
                                               setcart((prevState) => {
                                                 return { ...prevState, price: val, name: "annual" };
                                               });
-                                            }}>
+                                            }}
+                                            active={cSelected === 2}
+                                        >
                                         <CardBody>
                                             <CardTitle><h3>annual</h3></CardTitle>
                                             <CardText>${annual}/month/license</CardText>
@@ -158,7 +165,10 @@ function getStepContent(stepIndex) {
                     </>
                 )};
             case 1:
-                return (<Register/>);
+                if (user) {
+                    return null;
+                }else{
+                return (<Register/>);}
             case 2:
                 return (
                     <Col sm="12" md={{ size: 5, offset: 3 }}>
@@ -280,8 +290,12 @@ function getStepContent(stepIndex) {
 }
 
   const handleNext = () => {
+    if (user){
+    setActiveStep((prevActiveStep) => prevActiveStep + 2);
+    }else{
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  }
+};
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -310,7 +324,8 @@ function getStepContent(stepIndex) {
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
+            <div style={{float: "right", marginRight: "10%", marginBottom: "30px"}}>
+
               <Button
                 onClick={handleBack}
                 className={classes.backButton}
@@ -319,7 +334,9 @@ function getStepContent(stepIndex) {
               </Button>
               <Button variant="contained" color="primary" onClick={handleNext}> {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
+
             </div>
+               <div style={{clear:"both"}}></div>
           </div>
         )}
       </div>

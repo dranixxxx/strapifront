@@ -7,6 +7,7 @@ import fetch from "isomorphic-fetch";
 import Layout from "../components/Layout";
 import AppContext from "../context/AppContext";
 import withData from "../lib/apollo";
+import "../style/mycss.css";
 
 class MyApp extends App {
     state = {
@@ -101,8 +102,9 @@ class MyApp extends App {
                             item.id === newItem.id
                                 ? Object.assign({}, item, { quantity: item.quantity - 1 })
                                 : item
+
                         ),
-                        total: this.state.cart.total - item.price,
+                        total: this.state.cart.total - item.price,//? delete price but keep data on JSON
                     },
                 },
                 () => Cookie.set("cart", this.state.items)

@@ -47,7 +47,7 @@ const items = [
   }
 ];
 
-const mystyle ={textAlign: "center"}
+const mystyle ={textAlign: "center", marginTop: "50px"}
 
 function Home() {
     const {data} = useQuery(CAROUSEL);
@@ -113,9 +113,8 @@ function Home() {
     </Carousel>
     <Container style={mystyle}>
       <p >Đăng kí khóa học ngay hôm nay
-        <Button color="primary" href="/register">Đăng kí ngay</Button>
+        <Button color="primary" href="/register" style={{marginLeft: "20px"}}>Đăng kí ngay</Button>
       </p>
-        <br/>
         <h1 style={mystyle}>One Consistent Enterprise Experience.</h1>
       <Row>
 
@@ -164,14 +163,14 @@ function Home() {
 
     </Row>
     </Container>
-    <br></br>
+
     <div style={{backgroundColor:"#f4f4f8"}}>
         <br/>
         <Container>
         <Row>
 
             <Col md={4}>
-      <Card style={{backgroundColor:"transparent"}}>
+      <Card style={{backgroundColor:"transparent", border: "transparent"}}>
         <CardImg height="100px" top width="100%" src="https://d24cgw3uvb9a9h.cloudfront.net/static/94123/image/new/home/Gartner.png" alt="Card image cap" />
         <CardBody>
           <CardTitle tag="h5">Card title</CardTitle>
@@ -181,7 +180,7 @@ function Home() {
       </Card>
       </Col>
             <Col md={4}>
-      <Card style={{backgroundColor:"transparent"}}>
+      <Card style={{backgroundColor:"transparent", border: "transparent"}}>
         <CardImg height="100px" top width="100%" src="https://d24cgw3uvb9a9h.cloudfront.net/static/94123/image/new/home/trustradiusLogo.png" alt="Card image cap" />
         <CardBody>
           <CardTitle tag="h5">Card title</CardTitle>
@@ -191,7 +190,7 @@ function Home() {
       </Card>
       </Col>
             <Col md={4}>
-      <Card style={{backgroundColor:"transparent"}}>
+      <Card style={{backgroundColor:"transparent", border: "transparent"}}>
         <CardImg height="100px" top width="100%" src="https://d24cgw3uvb9a9h.cloudfront.net/static/94123/image/new/home/g2crowd.png" alt="Card image cap" />
         <CardBody>
           <CardTitle tag="h5">Card title</CardTitle>
@@ -205,11 +204,8 @@ function Home() {
       </Container>
     </div>
       <div>
-          <br/>
           <h1 style={mystyle}>Why us?</h1>
-          <br/>
-          <br/>
-          <Container>
+          <Container style={mystyle}>
               <Row>
           <Col md={4}>
              <img src="https://d24cgw3uvb9a9h.cloudfront.net/static/94123/image/new/home/icon_1.png" alt="">
@@ -266,22 +262,13 @@ function Home() {
              </img>
           </Col>
         </Row>
-            <br/>
+
             <div style={mystyle}>
-            <Button color="primary" href="/register">Dạy thử</Button>
+            <Button color="primary" href="/register" style={{margin: "10px"}}>Dạy thử</Button>
             <Button color="warning" href="/register">Đăng kí dạy học</Button>
             </div>
         </Container>
-      <br/>
-      <br/>
       </div>
-
-      <style jsx>
-          {`
-          Card{
-            backgroundColor:transparent;
-          `}
-      </style>
 
   </>
   );

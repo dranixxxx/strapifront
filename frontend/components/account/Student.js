@@ -16,7 +16,6 @@ import {
 import Link from "next/link";
 import Switch from "@material-ui/core/Switch";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://45.64.126.93:1337/"
 const GET_TK = gql`
     {
     role (id: 2){
@@ -39,6 +38,7 @@ function Student(props){
     checked: false,
 
   });
+    let price;
 
   const handleChange = (event) => {
     setCheck({ ...check, [event.target.name]: event.target.checked });
@@ -51,18 +51,15 @@ function Student(props){
     if (loading) return <h1>Fetching</h1>;
     return(
         <>
-
-            <Container>
             <Switch
                 checked={check.checked}
                 onChange={handleChange}
                 name="checked"
             />
-            <p>asd <b>{check.checked ? "on" : "off"}</b></p>
             <h1>{data.role.name}</h1>
             <Row>
                 <Col xs="6" sm="3" style={{ padding: 0 }} >
-            <Card style={{ height: "350px" }}>
+            <Card style={{ height: "600px", backgroundColor:"rgba(246,247,249,0.6)"  }}>
         <CardBody>
             <CardTitle><h6>BASIC</h6></CardTitle>
             <CardText><h6>Personal Meeting</h6></CardText>
@@ -74,7 +71,7 @@ function Student(props){
             color="primary"
 
             >
-        Sign up now!
+                <b>Sign up now!</b>
         </Button>
         </a>
 
@@ -97,20 +94,26 @@ function Student(props){
         </Card>
         </Col>
 
-            {data.role.roleprices.map((res) => (
+            {data.role.roleprices.map((res) =>{
+    if (check.checked){
+        price = <h3>{(res.price)/10}$ bill monthly</h3>;
+    } else {
+        price = <h3>{(res.price)}$ bill anually</h3>;
+    }
+    return(
                     <Col xs="6" sm="3" style={{ padding: 0 }} key={res.id}>
-            <Card style={{ height: "350px" }}>
+            <Card style={{ height: "600px"}} className={"hoa"+res.id}>
 
         <CardBody>
             <CardTitle><h6>{res.name}</h6></CardTitle>
             <CardText><h6>{res.name_des}</h6></CardText>
-            <CardText><h3>{res.price}</h3></CardText>
+            <CardText>{price}</CardText>
             <div>
             <Link
                 as={`/roleprice/${res.id}`}
                 href={`/roleprice?id=${res.id}`}
             >
-                <a className="btn btn-primary">View</a>
+                <a className="btn btn-outline-primary"><b>Buy now</b></a>
             </Link>
 
         </div>
@@ -118,13 +121,17 @@ function Student(props){
 
         </CardBody>
         </Card>
+        <style>
+            {`    
+            .hoa2{
+            background:rgba(246,247,249,0.6);
+            }
+            `}
+        </style>
         </Col>
-    ))}
+    )})}
 
         </Row>
-        <br/>
-        </Container>
-
         </>
 
     );

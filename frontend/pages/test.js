@@ -13,7 +13,7 @@ function test()  {
 
   return (
     <>
-    <Container>
+    <div style={{margin: "5%"}}>
       <h1>Choose a Plan</h1>
       <Nav tabs>
         <NavItem>
@@ -49,7 +49,7 @@ function test()  {
           </Row>
         </TabPane>
       </TabContent>
-    </Container>
+    </div>
 
       <h1>Plan comparision</h1>
       <Table striped bordered hover size="sm">
