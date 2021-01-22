@@ -290,7 +290,7 @@ function getStepContent(stepIndex) {
 }
 
   const handleNext = () => {
-    if (user){
+    if (user&&activeStep===0){
     setActiveStep((prevActiveStep) => prevActiveStep + 2);
     }else{
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
