@@ -63,7 +63,7 @@ const Layout = (props) => {
         <NavItem>
         {user ? (
                 //<h5>{user.username}</h5>
-            <Link href="https://localhost:3001">
+            <Link href="http://45.64.126.93:3006">
         <a className="nav-link"> {user.username}</a>
     </Link>
 ) : (
