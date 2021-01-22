@@ -4,8 +4,6 @@ import { gql } from "apollo-boost";
 import AppContext from "../../context/AppContext";
 
 import {
-    Container,
-    Button,
     Card,
     CardBody,
     CardText,
@@ -14,7 +12,8 @@ import {
     Row,
 } from "reactstrap";
 import Link from "next/link";
-import Switch from "@material-ui/core/Switch";
+import Switchh from "../Switchh";
+import { useBetween } from "use-between";
 
 const GET_TK = gql`
     {
@@ -34,15 +33,9 @@ const GET_TK = gql`
 
 function Student(props){
     //check
-    const [check, setCheck] = React.useState({
-    checked: false,
-
-  });
     let price;
-
-  const handleChange = (event) => {
-    setCheck({ ...check, [event.target.name]: event.target.checked });
-  };
+    let saving;
+    const {check} = useBetween(Switchh);
 
     //else
     const appContext = useContext(AppContext);
@@ -51,14 +44,8 @@ function Student(props){
     if (loading) return <h1>Fetching</h1>;
     return(
         <>
-            <Switch
-                checked={check.checked}
-                onChange={handleChange}
-                name="checked"
-            />
-            <h1>{data.role.name}</h1>
             <Row>
-                <Col xs="6" sm="3" style={{ padding: 0 }} >
+                <Col md="6" lg="3" style={{ padding: 0 }} >
             <Card style={{ height: "600px", backgroundColor:"rgba(246,247,249,0.6)"  }}>
         <CardBody>
             <CardTitle><h6>BASIC</h6></CardTitle>
@@ -66,13 +53,12 @@ function Student(props){
             <CardText><h3>Free</h3></CardText>
             <div>
             <a href="/register">
-            <Button
-            outline
-            color="primary"
+            <button
+            className="btn btnn btn-outline-primary"
 
             >
                 <b>Sign up now!</b>
-        </Button>
+        </button>
         </a>
 
         </div>
@@ -80,12 +66,6 @@ function Student(props){
                 <li>Host up to 100 participants</li>
                 <li>Group meetings for up to 40 minutes</li>
                 <li>Unlimited one-on-one Meetings</li>
-                <style jsx>
-                    {`
-                    li{
-                        font-size: 12.5px;
-                    `}
-                </style>
             </CardText>
 
         </CardBody>
@@ -96,15 +76,17 @@ function Student(props){
 
             {data.role.roleprices.map((res) =>{
     if (check.checked){
-        price = <h3>{(res.price)/10}$ bill monthly</h3>;
+        price = <h3>{(res.price)*10}$<span style={{fontWeight:"normal", fontSize: "16px"}}> /year/license</span></h3>;
+        saving =<b>{(res.price)*2}$ SAVING</b>
     } else {
-        price = <h3>{(res.price)}$ bill anually</h3>;
+        price = <h3>{(res.price)}$<span style={{fontWeight:"normal", fontSize: "16px"}}> /month/license</span></h3>;
     }
     return(
-                    <Col xs="6" sm="3" style={{ padding: 0 }} key={res.id}>
+                    <Col md="6" lg="3" style={{ padding: 0 }} key={res.id}>
             <Card style={{ height: "600px"}} className={"hoa"+res.id}>
 
         <CardBody>
+            <div style={{float: "right", color: "white", backgroundColor: "green", textAlign:"center", width: "150px"}}>{saving}</div>
             <CardTitle><h6>{res.name}</h6></CardTitle>
             <CardText><h6>{res.name_des}</h6></CardText>
             <CardText>{price}</CardText>
@@ -113,7 +95,7 @@ function Student(props){
                 as={`/roleprice/${res.id}`}
                 href={`/roleprice?id=${res.id}`}
             >
-                <a className="btn btn-outline-primary"><b>Buy now</b></a>
+                <a className="btn btnn btn-outline-primary"><b>Buy now</b></a>
             </Link>
 
         </div>
@@ -132,6 +114,13 @@ function Student(props){
     )})}
 
         </Row>
+        <style jsx>
+            {`
+              li{
+                font-size: 14px;
+                }  
+            `}
+        </style>
         </>
 
     );

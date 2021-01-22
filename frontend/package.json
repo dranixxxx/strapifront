@@ -21,9 +21,10 @@
     "react-dom": "^17.0.1",
     "reactstrap": "^8.7.1",
     "recompose": "^0.30.0",
-    "strapi": "^3.3.3"
+    "strapi": "^3.3.3",
+    "use-between": "^0.0.18"
   },
-   "scripts": {
+  "scripts": {
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js -p $PORT",

@@ -1,2 +1,37 @@
-.btn-outline-primary{color:black;background-color:white;background-image:none;border-color:grey}
-.btn-outline-primary:hover{color:#007BFF;background-color:white;border-color:#007BFF}
+.btn-outline-primary{color:black;background-color:white;background-image:none;border-color:grey;}
+.btn-outline-primary:hover{color:#0E71EB;background-color:white;border-color:#0E71EB}
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
+    color: black;
+    background-color: white;
+    border-color: #0E71EB;
+}
+.btnn{width: 216px; height: 41px}
+.btn-roleprice{border-radius: 1rem; border-width: 2px;}
+.tab-nav {
+    display: block;
+    padding: .10rem 6rem;
+}
+.card-title{
+	color: rgba(82,82,128,0.8);
+}
+.card-text{
+	color: #232333;
+}
+.switchstyle {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background: #ededf4;
+    padding: 50px 50px;
+    border-radius: 20px;
+    margin: 50px 0;
+}
+h1{
+    font-size: 48px;
+}
+p{
+    font-size: 20px;
+}
+.down{
+	color: white;
+}

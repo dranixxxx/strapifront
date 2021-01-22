@@ -70,8 +70,8 @@ function roleprice(){
     const [pSelected, setPSelected] = React.useState(null);
     const [cSelected, setcSelected] = React.useState(null);
     const classes = useStyles();
-    var monthly = pSelected/10;
-    var annual = pSelected/10* 0.8;
+    var monthly = pSelected;
+    var annual = pSelected*10 / 12;
 
     const steps = getSteps();
         const router = useRouter();
@@ -103,7 +103,7 @@ function getStepContent(stepIndex) {
                                 {roleprice.discounts.map((res) => (
                                     <Col sm="3" key={res.id}>
                                         <Card>
-                                            <Button outline color="primary" onClick={() => setPSelected(roleprice.price * res.discount)} active={pSelected === roleprice.price * res.discount}>
+                                            <Button className="btn btn-outline-primary btn-roleprice" onClick={() => setPSelected(roleprice.price * res.discount)} active={pSelected === roleprice.price * res.discount}>
                                             <CardBody>
                                                 <CardTitle><h3>{res.name}</h3></CardTitle>
                                                 <CardText>{roleprice.price * res.discount}</CardText>
@@ -120,7 +120,7 @@ function getStepContent(stepIndex) {
                                 <Col sm="3">
                                     <Card>
 
-                                        <Button outline color="primary" value={cartdata.price}
+                                        <Button className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
                                             onClick={() => {
                                               setcSelected(1)
                                               const val = monthly;
@@ -139,7 +139,7 @@ function getStepContent(stepIndex) {
                                 </Col>
                                 <Col sm="3">
                                     <Card>
-                                        <Button outline color="primary" value={cartdata.price}
+                                        <Button className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
                                             onClick={() => {
                                               setcSelected(2)
                                               const val = annual;

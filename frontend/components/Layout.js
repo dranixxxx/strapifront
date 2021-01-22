@@ -95,7 +95,7 @@ const Layout = (props) => {
 </NavItem>
     </Nav>
     <div style={{backgroundColor:"#E4F7EB"}}>
-        <Container><p style={{color:"#1C7E41"}}>special offer</p></Container>
+        <Container><p style={{color:"#1C7E41", textAlign: "center"}}>special offer</p></Container>
         <br/>
     </div>
     </header>

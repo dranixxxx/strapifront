@@ -3,21 +3,98 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col,Container,Table } 
 import classnames from 'classnames';
 import Teacher from "../components/account/Teacher";
 import Student from "../components/account/Student";
+import Switch from "@material-ui/core/Switch";
+import Grid from '@material-ui/core/Grid';
+import { useBetween } from "use-between";
+import Switchh from "../components/Switchh";
+import { withStyles } from "@material-ui/core/styles";
 
 function test()  {
   const [activeTab, setActiveTab] = useState('1');
-
+  //switch
+  const IOSSwitch = withStyles((theme) => ({
+  root: {
+    width: 42,
+    height: 26,
+    padding: 0,
+    margin: theme.spacing(1)
+  },
+  switchBase: {
+    padding: 2,
+    "&$checked": {
+      transform: "translateX(16px)",
+      color: theme.palette.common.white,
+      "& + $track": {
+        backgroundColor: "#0e71eb",
+        opacity: 1,
+        border: "none"
+      }
+    },
+    "&$focusVisible $thumb": {
+      color: "#0e71eb",
+      border: "6px solid #fff"
+    }
+  },
+  thumb: {
+    width: 22,
+    height: 22
+  },
+  track: {
+    borderRadius: 26 / 2,
+    border: `1px solid ${theme.palette.grey[400]}`,
+    backgroundColor: "#0e71eb",
+    opacity: 1,
+    transition: theme.transitions.create(["background-color", "border"])
+  },
+  checked: {},
+  focusVisible: {}
+}))(({ classes, ...props }) => {
+  return (
+    <Switch
+      focusVisibleClassName={classes.focusVisible}
+      disableRipple
+      classes={{
+        root: classes.root,
+        switchBase: classes.switchBase,
+        thumb: classes.thumb,
+        track: classes.track,
+        checked: classes.checked
+      }}
+      {...props}
+    />
+  );
+});
+  const { check, setCheck } = useBetween(Switchh);
+  const handleChange = (event) => {
+    setCheck({ ...check, [event.target.name]: event.target.checked });
+  };
+  //tab
   const toggle = tab => {
     if(activeTab !== tab) setActiveTab(tab);
   }
 
   return (
     <>
-    <div style={{margin: "5%"}}>
+    <div style={{margin: "50px"}}>
       <h1>Choose a Plan</h1>
+      <p>Find the right solution for your needs.</p>
+      <div className="switchstyle">
+      <Grid component="label" container alignItems="center" spacing={1}>
+      <Grid item>Billed monthly</Grid>
+      <Grid>
+      <IOSSwitch
+                checked={check.checked}
+                onChange={handleChange}
+                name="checked"
+            />
+      </Grid>
+      <Grid item>Billed anually</Grid>
+      </Grid>
+      </div>
       <Nav tabs>
         <NavItem>
           <NavLink
+            style={{padding: "0.5rem 10rem", fontSize: "18px"}}
             className={classnames({ active: activeTab === '1' })}
             onClick={() => { toggle('1'); }}
           >
@@ -26,6 +103,7 @@ function test()  {
         </NavItem>
         <NavItem>
           <NavLink
+            style={{padding: "0.5rem 10rem", fontSize: "18px"}}
             className={classnames({ active: activeTab === '2' })}
             onClick={() => { toggle('2'); }}
           >
@@ -36,14 +114,14 @@ function test()  {
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <Row>
-            <Col sm="12">
-              <Student/>
+            <Col sm="12" style={{marginTop: "50px"}}>
+              <Student />
             </Col>
           </Row>
         </TabPane>
         <TabPane tabId="2">
           <Row>
-            <Col sm="12">
+            <Col sm="12" style={{marginTop: "50px"}}>
               <Teacher/>
             </Col>
           </Row>
