@@ -63,9 +63,7 @@ const Layout = (props) => {
         <NavItem>
         {user ? (
                 //<h5>{user.username}</h5>
-            <Link href="http://45.64.126.93:3006">
-        <a className="nav-link"> {user.username}</a>
-    </Link>
+                    <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> {user.username}</a>
 ) : (
     <Link href="/register">
         <a className="nav-link"> Sign up</a>
