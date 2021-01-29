@@ -21,7 +21,7 @@ const CAROUSEL = gql`
     }
   }
 `;
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://45.64.126.93:1337"
 
 export default function Carousell() {
     const {loading, error, data} = useQuery(CAROUSEL);
