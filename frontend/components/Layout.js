@@ -39,6 +39,22 @@ const Layout = (props) => {
             }
           `}
 </style>
+    <Nav className="navbar navbar-dark bg-dark" >
+        <NavItem className="ml-auto">
+            <Link href="/test">
+                <a className ="navbar-brand" style={{fontSize: "13px", color:'white'}}>REQUEST A DEMO</a>
+            </Link>
+            <Link href="/test">
+                <a className ="navbar-brand" style={{fontSize: "13px", color:'white'}}>1.888.799.9666</a>
+            </Link>
+            <Link href="/test">
+                <a className ="navbar-brand" style={{fontSize: "13px", color:'white'}}>HOW TO VIDEOS</a>
+            </Link>
+            <Link href="/test">
+                <a className ="navbar-brand" style={{fontSize: "13px", color:'white'}}>SUPPORT</a>
+            </Link>
+        </NavItem>
+    </Nav>
     <Nav className="navbar navbar-light " style={{borderBottom:"1px solid"}}>
         <NavItem>
         <Link href="/">
