@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col,Container,Table } from 'reactstrap';
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  Col,
+  Container,
+  Table,
+  Label,
+  Input,
+  Form,
+  FormGroup
+} from 'reactstrap';
 import classnames from 'classnames';
 import Teacher from "../components/account/Teacher";
 import Student from "../components/account/Student";
@@ -79,6 +93,8 @@ function test()  {
       <h1>Choose a Plan</h1>
       <p>Find the right solution for your needs.</p>
       <div className="switchstyle">
+      <Row>
+      <Col md={6}>
       <Grid component="label" container alignItems="center" spacing={1}>
       <Grid item>Billed monthly</Grid>
       <Grid>
@@ -90,6 +106,35 @@ function test()  {
       </Grid>
       <Grid item>Billed anually</Grid>
       </Grid>
+      </Col>
+      <Col md={6}>
+      <Grid component="label" container alignItems="center" spacing={1}>
+      <Grid item><h4>CURRENCY</h4></Grid>
+      <Grid>
+        <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
+          <option>VN</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </Input>
+      </Grid>
+      </Grid>
+      <br/>
+      <Grid component="label" container alignItems="center" spacing={1}>
+      <Grid item><h4>REGION</h4></Grid>
+      <Grid>
+        <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
+          <option>VN</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </Input>
+      </Grid>
+      </Grid>
+      </Col>
+      </Row>
       </div>
       <Nav tabs>
         <NavItem>

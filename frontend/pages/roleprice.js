@@ -272,17 +272,20 @@ function getStepContent(stepIndex) {
                     </Col>);
             case 3:
                 return(
-                    <div>
-                    <h1>{data.roleprice.price}</h1>
-                    <h1>{cartdata.firstname}</h1>
-                    <h1>{cartdata.lastname}</h1>
-                    <h1>{cartdata.email}</h1>
-                    <h1>{cartdata.city}</h1>
-                    <h1>{cartdata.state}</h1>
+                    <Col xs="6">
+                    <Card>
+                        <CardBody>
+                    <CardTitle><h1>Confirm</h1></CardTitle>
+                    <h1>Người mua hàng: {cartdata.firstname} {cartdata.lastname}</h1>
+                    <p>Email: {cartdata.email}</p>
+                    <p>City: {cartdata.city}</p>
+                    <p>State: {cartdata.state}</p>
                         <br/>
-                    <h1>{cartdata.price}</h1>
-                    <h1>{cartdata.name}</h1>
-                    </div>
+                    <h2>Loại tài khoản: {cartdata.name}</h2>
+                    <h1>Thành tiền: {cartdata.price}</h1>
+                        </CardBody>
+                    </Card>
+                    </Col>
                 ) ;
             default:
                 return history.back();
@@ -303,6 +306,7 @@ function getStepContent(stepIndex) {
 
 
   return (
+    <Container>
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -324,7 +328,7 @@ function getStepContent(stepIndex) {
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div style={{float: "right", marginRight: "10%", marginBottom: "30px"}}>
+            <div style={{float: "right", marginBottom: "30px"}}>
 
               <Button
                 onClick={handleBack}
@@ -341,6 +345,7 @@ function getStepContent(stepIndex) {
         )}
       </div>
     </div>
+    </Container>
   );
 }
 
