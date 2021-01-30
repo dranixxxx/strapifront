@@ -39,7 +39,8 @@ const Layout = (props) => {
             }
           `}
 </style>
-    <Nav className="navbar navbar-dark bg-dark" >
+    {/*<div style={{position:"fixed",zIndex:"20",width:"100%"}}>*/}
+    <Nav className="navbar navbar-dark bg-dark">
         <NavItem className="ml-auto">
             <Link href="/test">
                 <a className ="navbar-brand" style={{fontSize: "13px", color:'white'}}>REQUEST A DEMO</a>
@@ -55,7 +56,7 @@ const Layout = (props) => {
             </Link>
         </NavItem>
     </Nav>
-    <Nav className="navbar navbar-light " style={{borderBottom:"1px solid"}}>
+    <Nav className="navbar navbar-light " style={{borderBottom:"1px solid",}}>
         <NavItem>
         <Link href="/">
         <a className="navbar-brand">EDUNET</a>
@@ -108,10 +109,11 @@ const Layout = (props) => {
 )}
 </NavItem>
     </Nav>
-    <div style={{backgroundColor:"#E4F7EB"}}>
+    <div style={{backgroundColor:"#E4F7EB",}}>{/*cần fix căn dòng*/}
         <Container><p style={{color:"#1C7E41", textAlign: "center"}}>special offer</p></Container>
         <br/>
     </div>
+    {/*</div>*/}
     </header>
     <body>{props.children}</body>
     <footer><Footer/></footer>
