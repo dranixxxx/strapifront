@@ -12,6 +12,8 @@ import Link from "next/link";
 import Register from "../pages/register";
 import Cart from "../components/cart";
 
+import axios from 'axios';
+
 import {
     Card,
     CardBody,
