@@ -65,19 +65,20 @@ function getSteps() {
 
 function roleprice(){
     const appContext = useContext(AppContext);
-    const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "" });
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [pSelected, setPSelected] = React.useState(null);
-    const [cSelected, setcSelected] = React.useState(null);
-    const classes = useStyles();
-    var monthly = pSelected;
-    var annual = pSelected*10 / 12;
-
-    const steps = getSteps();
-        const router = useRouter();
+    const router = useRouter();
     const { loading, error, data } = useQuery(GET_TK, {
         variables: { id: router.query.id },
     });
+    const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "" });
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [cSelected, setcSelected] = React.useState(null);
+    const classes = useStyles();
+    const [pSelected, setPSelected] = React.useState(0);
+    var monthly = pSelected*1;
+    var annual = pSelected*10 / 12;
+    var check1=0;
+    const steps = getSteps();
+
     const { user, setUser } = useContext(AppContext);
 function getStepContent(stepIndex) {
 
@@ -88,6 +89,13 @@ function getStepContent(stepIndex) {
                 if (loading) return <h1>Fetching</h1>;
                 if (data.roleprice) {
                     const {roleprice} = data;
+                    function handleDelete2(){
+                   var x = document.getElementById("lala");
+                   console.log(x);
+                   x.classList.remove("active1");
+
+
+                                       };
                 return (
 
                     <>
@@ -100,18 +108,75 @@ function getStepContent(stepIndex) {
                             </InputGroup>
                             <h3>2. Choose plan</h3>
                             <Row>
-                                {roleprice.discounts.map((res) => (
+                                {roleprice.discounts.map((res) =>
+                                {
+                                  function handleDelete1(){
+                                           var x = document.getElementById("hoa1");
+                                          x.classList.remove("active1");
+                                       };
+
+                                    function handleDelete(){
+                                               var i=1;
+                                             while(i<10){
+                                              var x = document.getElementById("hoa1");
+                                             x.classList.remove("active1");
+                                             i++;
+                                             }
+
+                                       };
+
+
+
+                                  if(res.id==1){
+
+                                   return (
                                     <Col sm="3" key={res.id}>
+
                                         <Card>
-                                            <Button className="btn btn-outline-primary btn-roleprice" onClick={() => setPSelected(roleprice.price * res.discount)} active={pSelected === roleprice.price * res.discount}>
+                                            <Button id={"hoa"+res.id} className="btn btn-outline-primary btn-roleprice active1"
+                                                    onClick={() => setPSelected(roleprice.price * res.discount)
+                                                                   }
+                                                    active={pSelected === roleprice.price * res.discount
+                                                            }>
                                             <CardBody>
                                                 <CardTitle><h3>{res.name}</h3></CardTitle>
                                                 <CardText>{roleprice.price * res.discount}</CardText>
                                             </CardBody>
                                             </Button>
                                         </Card>
+
                                     </Col>
-                                ))}
+                                );
+
+
+                                  }else{
+
+
+                                    return (
+
+                                    <Col sm="3" key={res.id}>
+
+                                        <Card >
+                                            <Button  id={"hoa"+res.id} className="btn btn-outline-primary btn-roleprice"
+                                                    onClick={() => {setPSelected(roleprice.price * res.discount);
+                                                                    handleDelete();
+                                                                   }}
+                                                    active={pSelected === roleprice.price * res.discount
+                                                            }>
+                                            <CardBody>
+                                                <CardTitle><h3>{res.name}</h3></CardTitle>
+                                                <CardText>{roleprice.price * res.discount}</CardText>
+                                            </CardBody>
+                                            </Button>
+                                        </Card>
+
+                                    </Col>
+                                )
+                                  }
+                                 }
+
+
+                                )}
 
                             </Row>
 
@@ -120,7 +185,7 @@ function getStepContent(stepIndex) {
                                 <Col sm="3">
                                     <Card>
 
-                                        <Button className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
+                                        <Button id="lala" className="btn btn-outline-primary btn-roleprice active1" value={cartdata.price}
                                             onClick={() => {
                                               setcSelected(1)
                                               const val = monthly;
@@ -138,10 +203,11 @@ function getStepContent(stepIndex) {
                                     </Card>
                                 </Col>
                                 <Col sm="3">
-                                    <Card>
-                                        <Button className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
+                                    <Card >
+                                        <Button  className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
                                             onClick={() => {
-                                              setcSelected(2)
+                                              handleDelete2();
+                                              setcSelected(2);
                                               const val = annual;
                                               setcart((prevState) => {
                                                 return { ...prevState, price: val, name: "annual" };
@@ -159,9 +225,18 @@ function getStepContent(stepIndex) {
                             </Row>
                             <p>Selected: {pSelected}</p>
                             <p>Selected: {cartdata.price}</p>
-
                             <br/>
                         </Container>
+                         <style>
+                                {`
+
+                                  .active1 {
+                                  border: 1px solid #007bff;
+                                  border-radius: 10px;
+                                        }
+
+                                  `}
+                            </style>
                     </>
                 )};
             case 1:
@@ -172,12 +247,13 @@ function getStepContent(stepIndex) {
             case 2:
                 return (
                     <Col sm="12" md={{ size: 5, offset: 3 }}>
-                        <Form>
+                        <Form >
                             <div><h3>1. Billing contact</h3></div>
                           <FormGroup>
                             <Label for="firstname">First Name</Label>
                             <Input
                                 type="text"
+                                id="username"
                                 value={cartdata.firstname}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -193,6 +269,7 @@ function getStepContent(stepIndex) {
                             <Label for="lastname">Last Name</Label>
                             <Input
                                 type="text"
+                                id="username1"
                                 value={cartdata.lastname}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -208,6 +285,7 @@ function getStepContent(stepIndex) {
                             <Label for="exampleEmail">Email</Label>
                             <Input
                                 type="email"
+                                id="email"
                                 value={cartdata.email}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -221,16 +299,17 @@ function getStepContent(stepIndex) {
                           </FormGroup>
                             <FormGroup>
                             <Label for="examplePassword">Company/Organization Name</Label>
-                            <Input type="email" name="password" id="examplePassword" />
+                            <Input type="email"  name="password" id="examplePassword" />
                           </FormGroup>
                             <FormGroup>
                             <Label for="examplePassword">Address</Label>
-                            <Input type="email" name="password" id="examplePassword" />
+                            <Input type="email"  name="password" id="examplePassword1" />
                           </FormGroup>
                             <FormGroup>
                             <Label for="examplePassword">City</Label>
                             <Input
                                 type="text"
+                                id="examplePassword2"
                                 value={cartdata.city}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -246,6 +325,7 @@ function getStepContent(stepIndex) {
                             <Label for="examplePassword">State</Label>
                             <Input
                                 type="text"
+                                id="username6"
                                 value={cartdata.state}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -267,46 +347,85 @@ function getStepContent(stepIndex) {
                               <option>4</option>
                               <option>5</option>
                             </Input>
+
                           </FormGroup>
                         </Form>
                     </Col>);
             case 3:
                 return(
-                    <Col xs="6">
-                    <Card>
-                        <CardBody>
-                    <CardTitle><h1>Confirm</h1></CardTitle>
-                    <h1>Người mua hàng: {cartdata.firstname} {cartdata.lastname}</h1>
-                    <p>Email: {cartdata.email}</p>
-                    <p>City: {cartdata.city}</p>
-                    <p>State: {cartdata.state}</p>
+                    <div>
+                    <h1>{data.roleprice.price}</h1>
+                    <h1>{cartdata.firstname}</h1>
+                    <h1>{cartdata.lastname}</h1>
+                    <h1>{cartdata.email}</h1>
+                    <h1>{cartdata.city}</h1>
+                    <h1>{cartdata.state}</h1>
                         <br/>
-                    <h2>Loại tài khoản: {cartdata.name}</h2>
-                    <h1>Thành tiền: {cartdata.price}</h1>
-                        </CardBody>
-                    </Card>
-                    </Col>
+                    <h1>{cartdata.price}</h1>
+                    <h1>{cartdata.name}</h1>
+                    </div>
                 ) ;
             default:
                 return history.back();
         }
+
+
+
 }
 
   const handleNext = () => {
-    if (user&&activeStep===0){
+    if (activeStep===2) {
+       validateForm();
+        if (check1==12) {
+setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
+
+    }else{
+    if (user && activeStep === 0){
     setActiveStep((prevActiveStep) => prevActiveStep + 2);
     }else{
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  }
+  }}
+
 };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+function validateForm(){
+      var username = document.getElementById('username').value;
+      var username1 = document.getElementById('username1').value;
+      var email = document.getElementById('email').value;
+      var examplePassword = document.getElementById('examplePassword').value;
+        var examplePassword1 = document.getElementById('examplePassword1').value;
+          var examplePassword2 = document.getElementById('examplePassword2').value;
+      var username6 = document.getElementById('username6').value;
+    console.log(username);
+    if (username == ''){
+        alert('Bạn chưa nhập tên tên');
+    }else if(username1 == ''){
+      alert('Bạn chưa nhập họ');
+  }else if(email == ''){
+      alert('Bạn chưa nhập email');
+  }else if(examplePassword == ''){
+      alert('Bạn chưa nhập công ty');
+  } else if(examplePassword1 == ''){
+      alert('Bạn chưa nhập Address');
+  } else if(examplePassword2 == ''){
+      alert('Bạn chưa nhập city');
+  } else if(username6 == ''){
+      alert('Bạn chưa nhập city');
+  } else{
+        check1=12;
+        return true;
 
+    }
+
+    return false;
+}
   return (
-    <Container>
+
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -319,6 +438,7 @@ function getStepContent(stepIndex) {
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>All steps completed</Typography>
+            <Button variant="contained" color="primary" onClick={handleNext}>test</Button>
             <Link href="/checkout"><Button
                 outline
                 color="primary"
@@ -328,7 +448,7 @@ function getStepContent(stepIndex) {
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div style={{float: "right", marginBottom: "30px"}}>
+            <div style={{float: "right", marginRight: "10%", marginBottom: "30px"}}>
 
               <Button
                 onClick={handleBack}
@@ -336,16 +456,18 @@ function getStepContent(stepIndex) {
               >
                 Back
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}> {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
 
-            </div>
+              <Button variant="contained" color="primary" onClick={handleNext}> {activeStep === steps.length - 1 ? 'Finish' : 'Next'
+              }
+              </Button>
+              </div>
+
+
                <div style={{clear:"both"}}></div>
           </div>
         )}
       </div>
     </div>
-    </Container>
   );
 }
 
