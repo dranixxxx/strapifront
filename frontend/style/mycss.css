@@ -45,3 +45,41 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+body{
+    font-family:  arial;
+}
+.active.nav-link {
+    display: block;
+    padding: .10rem 6rem;
+}
+.navbar.navbar-light li{
+    float: left;
+}
+.dropdown{
+    background-color: white;
+}
+.btn-secondary {
+    color: #fff;
+    background-color: white;
+
+}
+.ft{
+    float : left;
+}
+
+ li{
+    list-style: none;
+}
+ li a{
+    text-decoration: none;
+}
+
+footer{
+    background-color: #5a5a5a;
+    padding-bottom:200px;
+}
+
+.col-lg-2 a{
+    color:#fff!important;
+    font-size: 11px;
+}

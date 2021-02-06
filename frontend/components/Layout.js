@@ -29,7 +29,7 @@ const Layout = (props) => {
         </Head>
         <header>
         <style jsx>
-    {`
+    {`       
             a {
               color: red;
             }
@@ -39,8 +39,7 @@ const Layout = (props) => {
             }
           `}
 </style>
-    {/*<div style={{position:"fixed",zIndex:"20",width:"100%"}}>*/}
-    <Nav className="navbar navbar-dark bg-dark">
+    <Nav className="navbar navbar-dark bg-dark" style={{position:"fixed",zIndex:"20",width:"100%"}}>
         <NavItem className="ml-auto">
             <Link href="/test">
                 <a className ="navbar-brand" style={{fontSize: "13px", color:'white'}}>REQUEST A DEMO</a>
@@ -56,7 +55,7 @@ const Layout = (props) => {
             </Link>
         </NavItem>
     </Nav>
-    <Nav className="navbar navbar-light " style={{borderBottom:"1px solid",}}>
+    <Nav className="navbar navbar-light " style={{borderBottom:"1px solid",padding:"8px 7% 8px 7%", backgroundColor: "white",position:"fixed",zIndex:"5",top:"45px",width:"100%"}}>
         <NavItem>
         <Link href="/">
         <a className="navbar-brand">EDUNET</a>
@@ -75,12 +74,18 @@ const Layout = (props) => {
 
 
         <NavItem className="ml-auto">
-            {/*<Popoverr/>*/}
         </NavItem>
         <NavItem>
         {user ? (
-                //<h5>{user.username}</h5>
+                    <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> vào lớp học</a>
+
+) : (null)}
+
+</NavItem>
+        <NavItem>
+        {user ? (
                     <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> {user.username}</a>
+
 ) : (
     <Link href="/register">
         <a className="nav-link"> Sign up</a>
@@ -109,11 +114,10 @@ const Layout = (props) => {
 )}
 </NavItem>
     </Nav>
-    <div style={{backgroundColor:"#E4F7EB",}}>{/*cần fix căn dòng*/}
+    <div style={{backgroundColor:"#E4F7EB",position:"fixed",zIndex:"5",top:"102px",width:"100%"}}>
         <Container><p style={{color:"#1C7E41", textAlign: "center"}}>special offer</p></Container>
         <br/>
     </div>
-    {/*</div>*/}
     </header>
     <body>{props.children}</body>
     <footer><Footer/></footer>
