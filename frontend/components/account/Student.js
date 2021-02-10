@@ -63,9 +63,9 @@ function Student(props){
 
         </div>
             <CardText>
-                <li>Host up to 100 participants</li>
-                <li>Group meetings for up to 40 minutes</li>
-                <li>Unlimited one-on-one Meetings</li>
+                <div className="des">Host up to 100 participants</div>
+                <div className="des">Group meetings for up to 40 minutes</div>
+                <div className="des">Unlimited one-on-one Meetings</div>
             </CardText>
 
         </CardBody>
@@ -99,7 +99,7 @@ function Student(props){
             </Link>
 
         </div>
-            <CardText><li>{res.description}</li></CardText>
+            <CardText><pre><div className="des">{res.description}</div></pre></CardText>
 
         </CardBody>
         </Card>
@@ -116,7 +116,7 @@ function Student(props){
         </Row>
         <style jsx>
             {`
-              li{
+              des{
                 font-size: 14px;
                 }  
             `}

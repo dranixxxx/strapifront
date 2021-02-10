@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Link from "next/link";
 import Register from "../pages/register";
 import Cart from "../components/cart";
-
 import axios from 'axios';
 
 import {
@@ -61,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function getSteps() {
-  return ['Configure products', 'Create account', 'Payment', 'Review'];
+  return ['Configure products', 'Create account', 'Payment'];
 }
 
 
@@ -71,17 +70,30 @@ function roleprice(){
     const { loading, error, data } = useQuery(GET_TK, {
         variables: { id: router.query.id },
     });
-    const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "" });
+    const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "",bank:"VCB" });
     const [activeStep, setActiveStep] = React.useState(0);
     const [cSelected, setcSelected] = React.useState(null);
     const classes = useStyles();
-    const [pSelected, setPSelected] = React.useState(0);
+    const [pSelected, setPSelected] = React.useState(null);
     var monthly = pSelected*1;
-    var annual = pSelected*10 / 12;
-    var check1=0;
+    var annual = parseFloat(pSelected*10 / 12).toFixed( 2 );
     const steps = getSteps();
-
+    var check1=0;
+    //user để skip register
     const { user, setUser } = useContext(AppContext);
+
+    let urll;
+    axios.get('/api/createpaymenturl', { params: cartdata })
+        .then(function (result) {
+            urll = result.data.data;
+        });
+
+    const onHandleSubmit = (e) => {
+    e.preventDefault();
+    console.log(cartdata);
+    //getPaymentUrl();
+    router.push(urll);
+  };
 function getStepContent(stepIndex) {
 
         switch (stepIndex) {
@@ -91,13 +103,6 @@ function getStepContent(stepIndex) {
                 if (loading) return <h1>Fetching</h1>;
                 if (data.roleprice) {
                     const {roleprice} = data;
-                    function handleDelete2(){
-                   var x = document.getElementById("lala");
-                   console.log(x);
-                   x.classList.remove("active1");
-
-
-                                       };
                 return (
 
                     <>
@@ -110,84 +115,33 @@ function getStepContent(stepIndex) {
                             </InputGroup>
                             <h3>2. Choose plan</h3>
                             <Row>
-                                {roleprice.discounts.map((res) =>
-                                {
-                                  function handleDelete1(){
-                                           var x = document.getElementById("hoa1");
-                                          x.classList.remove("active1");
-                                       };
-
-                                    function handleDelete(){
-                                               var i=1;
-                                             while(i<10){
-                                              var x = document.getElementById("hoa1");
-                                             x.classList.remove("active1");
-                                             i++;
-                                             }
-
-                                       };
-
-
-
-                                  if(res.id==1){
-
-                                   return (
-                                    <Col sm="3" key={res.id}>
-
-                                        <Card>
-                                            <Button id={"hoa"+res.id} className="btn btn-outline-primary btn-roleprice active1"
-                                                    onClick={() => setPSelected(roleprice.price * res.discount)
-                                                                   }
-                                                    active={pSelected === roleprice.price * res.discount
-                                                            }>
-                                            <CardBody>
-                                                <CardTitle><h3>{res.name}</h3></CardTitle>
-                                                <CardText>{roleprice.price * res.discount}</CardText>
-                                            </CardBody>
-                                            </Button>
-                                        </Card>
-
-                                    </Col>
-                                );
-
-
-                                  }else{
-
-
-                                    return (
-
-                                    <Col sm="3" key={res.id}>
-
-                                        <Card >
-                                            <Button  id={"hoa"+res.id} className="btn btn-outline-primary btn-roleprice"
-                                                    onClick={() => {setPSelected(roleprice.price * res.discount);
-                                                                    handleDelete();
-                                                                   }}
-                                                    active={pSelected === roleprice.price * res.discount
-                                                            }>
-                                            <CardBody>
-                                                <CardTitle><h3>{res.name}</h3></CardTitle>
-                                                <CardText>{roleprice.price * res.discount}</CardText>
-                                            </CardBody>
-                                            </Button>
-                                        </Card>
-
-                                    </Col>
-                                )
-                                  }
-                                 }
-
-
-                                )}
+                                {roleprice.discounts.map((res) => {
+                                    return(
+                                        <Col sm="3" key={res.id}>
+                                            <div className="card1">
+                                                <Button className="btn btn-outline-primary btn-roleprice"
+                                                        onClick={() => setPSelected(roleprice.price * res.discount)
+                                                        }
+                                                        active={pSelected === roleprice.price * res.discount
+                                                        }>
+                                                    <CardBody>
+                                                        <CardTitle><h3>{res.name}</h3></CardTitle>
+                                                        <CardText>{roleprice.price * res.discount}</CardText>
+                                                    </CardBody>
+                                                </Button>
+                                            </div>
+                                        </Col>
+                                    )
+                                })}
 
                             </Row>
 
                             <h3>3. Choose cycle</h3>
                             <Row>
                                 <Col sm="3">
-                                    <Card>
+                                    <div className="card1">
 
-                                        <Button id="lala" className="btn btn-outline-primary btn-roleprice active1" value={cartdata.price}
+                                        <Button className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
                                             onClick={() => {
                                               setcSelected(1)
                                               const val = monthly;
@@ -202,14 +156,13 @@ function getStepContent(stepIndex) {
                                             <CardText>${monthly}/month/license</CardText>
                                             </CardBody>
                                         </Button>
-                                    </Card>
+                                    </div>
                                 </Col>
                                 <Col sm="3">
-                                    <Card >
-                                        <Button  className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
+                                    <div className="card1">
+                                        <Button className="btn btn-outline-primary btn-roleprice" value={cartdata.price}
                                             onClick={() => {
-                                              handleDelete2();
-                                              setcSelected(2);
+                                              setcSelected(2)
                                               const val = annual;
                                               setcart((prevState) => {
                                                 return { ...prevState, price: val, name: "annual" };
@@ -222,23 +175,13 @@ function getStepContent(stepIndex) {
                                             <CardText>${annual}/month/license</CardText>
                                         </CardBody>
                                         </Button>
-                                    </Card>
+                                    </div>
                                 </Col>
                             </Row>
                             <p>Selected: {pSelected}</p>
                             <p>Selected: {cartdata.price}</p>
                             <br/>
                         </Container>
-                         <style>
-                                {`
-
-                                  .active1 {
-                                  border: 1px solid #007bff;
-                                  border-radius: 10px;
-                                        }
-
-                                  `}
-                            </style>
                     </>
                 )};
             case 1:
@@ -255,7 +198,7 @@ function getStepContent(stepIndex) {
                             <Label for="firstname">First Name</Label>
                             <Input
                                 type="text"
-                                id="username"
+                                id="firstname"
                                 value={cartdata.firstname}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -271,7 +214,7 @@ function getStepContent(stepIndex) {
                             <Label for="lastname">Last Name</Label>
                             <Input
                                 type="text"
-                                id="username1"
+                                id="lastname"
                                 value={cartdata.lastname}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -284,7 +227,7 @@ function getStepContent(stepIndex) {
                               />
                           </FormGroup>
                           <FormGroup>
-                            <Label for="exampleEmail">Email</Label>
+                            <Label for="email">Email</Label>
                             <Input
                                 type="email"
                                 id="email"
@@ -300,18 +243,18 @@ function getStepContent(stepIndex) {
                               />
                           </FormGroup>
                             <FormGroup>
-                            <Label for="examplePassword">Company/Organization Name</Label>
-                            <Input type="email"  name="password" id="examplePassword" />
+                            <Label for="company">Company/Organization Name</Label>
+                            <Input type="text"  id="company" />
                           </FormGroup>
                             <FormGroup>
-                            <Label for="examplePassword">Address</Label>
-                            <Input type="email"  name="password" id="examplePassword1" />
+                            <Label for="address">Address</Label>
+                            <Input type="text" id="address" />
                           </FormGroup>
                             <FormGroup>
-                            <Label for="examplePassword">City</Label>
+                            <Label for="city">City</Label>
                             <Input
                                 type="text"
-                                id="examplePassword2"
+                                id="city"
                                 value={cartdata.city}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -324,10 +267,10 @@ function getStepContent(stepIndex) {
                               />
                           </FormGroup>
                             <FormGroup>
-                            <Label for="examplePassword">State</Label>
+                            <Label for="state">State</Label>
                             <Input
                                 type="text"
-                                id="username6"
+                                id="state"
                                 value={cartdata.state}
                                 placeholder="Enter a message"
                                 onChange={(e) => {
@@ -341,38 +284,29 @@ function getStepContent(stepIndex) {
                           </FormGroup>
                             <div><h3>2. Payment Method</h3></div>
                           <FormGroup>
-                            <Label for="exampleSelect">Select Bank</Label>
-                            <Input type="select" name="select" id="exampleSelect">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                            <Label for="bank">Select Bank</Label>
+                            <Input type="select" name="select" id="bank"
+                            value={cartdata.bank}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setcart((prevState) => {
+                                    return { ...prevState, bank: val };
+                                    // return Object.assign({}, prevState, { message: val }); // Also works
+                                  });
+                                }}>
+                              <option>VCB</option>
+                              <option>VNPAYQR</option>
+                              <option>VISA</option>
+                              <option>SACOMBANK</option>
+                              <option>SCB</option>
                             </Input>
 
                           </FormGroup>
                         </Form>
                     </Col>);
-            case 3:
-                return(
-                    <div>
-                    <h1>{data.roleprice.price}</h1>
-                    <h1>{cartdata.firstname}</h1>
-                    <h1>{cartdata.lastname}</h1>
-                    <h1>{cartdata.email}</h1>
-                    <h1>{cartdata.city}</h1>
-                    <h1>{cartdata.state}</h1>
-                        <br/>
-                    <h1>{cartdata.price}</h1>
-                    <h1>{cartdata.name}</h1>
-                    </div>
-                ) ;
             default:
                 return history.back();
         }
-
-
-
 }
 
   const handleNext = () => {
@@ -381,14 +315,24 @@ function getStepContent(stepIndex) {
         if (check1==12) {
 setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
-
-    }else{
-    if (user && activeStep === 0){
-    setActiveStep((prevActiveStep) => prevActiveStep + 2);
-    }else{
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  }}
-
+    //cần làm sạch code
+    }else {
+        if (user && activeStep === 0) {
+            if (cartdata.price==0){
+            alert('Bạn chưa nhập mặt hàng');
+            }
+            else {
+                setActiveStep((prevActiveStep) => prevActiveStep + 2);
+            }
+        } else {
+            if (cartdata.price==0){
+            alert('Bạn chưa nhập mặt hàng');
+            }
+            else {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            }
+        }
+    }
 };
 
   const handleBack = () => {
@@ -396,28 +340,27 @@ setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
 function validateForm(){
-      var username = document.getElementById('username').value;
-      var username1 = document.getElementById('username1').value;
+      var firstname = document.getElementById('firstname').value;
+      var lastname = document.getElementById('lastname').value;
       var email = document.getElementById('email').value;
-      var examplePassword = document.getElementById('examplePassword').value;
-        var examplePassword1 = document.getElementById('examplePassword1').value;
-          var examplePassword2 = document.getElementById('examplePassword2').value;
-      var username6 = document.getElementById('username6').value;
-    console.log(username);
-    if (username == ''){
+      var company = document.getElementById('company').value;
+        var address = document.getElementById('address').value;
+          var city = document.getElementById('city').value;
+      var state = document.getElementById('state').value;
+    if (firstname == ''){
         alert('Bạn chưa nhập tên tên');
-    }else if(username1 == ''){
+    }else if(lastname == ''){
       alert('Bạn chưa nhập họ');
   }else if(email == ''){
       alert('Bạn chưa nhập email');
-  }else if(examplePassword == ''){
+  }else if(company == ''){
       alert('Bạn chưa nhập công ty');
-  } else if(examplePassword1 == ''){
+  } else if(address == ''){
       alert('Bạn chưa nhập Address');
-  } else if(examplePassword2 == ''){
+  } else if(city == ''){
       alert('Bạn chưa nhập city');
-  } else if(username6 == ''){
-      alert('Bạn chưa nhập city');
+  } else if(state == ''){
+      alert('Bạn chưa nhập state');
   } else{
         check1=12;
         return true;
@@ -426,8 +369,8 @@ function validateForm(){
 
     return false;
 }
-  return (
 
+  return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
@@ -438,15 +381,26 @@ function validateForm(){
       </Stepper>
       <div>
         {activeStep === steps.length ? (
-          <div>
+          <Container>
+              <h1>{data.roleprice.price}</h1>
+              <h1>{cartdata.firstname}</h1>
+              <h1>{cartdata.lastname}</h1>
+              <h1>{cartdata.email}</h1>
+              <h1>{cartdata.city}</h1>
+              <h1>{cartdata.state}</h1>
+              <h1>{cartdata.bank}</h1>
+              <br/>
+              <h1>{cartdata.price}</h1>
+              <h1>{cartdata.name}</h1>
             <Typography className={classes.instructions}>All steps completed</Typography>
-            <Button variant="contained" color="primary" onClick={handleNext}>test</Button>
-            <Link href="/checkout"><Button
-                outline
-                color="primary"
-                onClick={() => appContext.addItem(cartdata)}>
-                Checkout</Button></Link>
-          </div>
+            <Form
+            onSubmit={onHandleSubmit}
+            >
+            <button type="submit" className="btn btn-primary">
+            Checkout
+            </button>
+            </Form>
+          </Container>
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
@@ -458,13 +412,10 @@ function validateForm(){
               >
                 Back
               </Button>
-
-              <Button variant="contained" color="primary" onClick={handleNext}> {activeStep === steps.length - 1 ? 'Finish' : 'Next'
-              }
+              <Button variant="contained" color="primary" onClick={handleNext}> {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
-              </div>
 
-
+            </div>
                <div style={{clear:"both"}}></div>
           </div>
         )}

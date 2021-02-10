@@ -47,6 +47,7 @@ img {
 }
 body{
     font-family:  arial;
+    padding-top: 172px;
 }
 .active.nav-link {
     display: block;
@@ -73,8 +74,26 @@ footer{
     background-color: #5a5a5a;
     padding-bottom:200px;
 }
-
+.card1 {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 0.25rem;
+}
 .col-lg-2 a{
     color:#fff!important;
     font-size: 11px;
+}
+.des{
+    font-size: 14px;
+    font-family:  arial;
 }
