@@ -382,16 +382,21 @@ function validateForm(){
       <div>
         {activeStep === steps.length ? (
           <Container>
-              <h1>{data.roleprice.price}</h1>
-              <h1>{cartdata.firstname}</h1>
-              <h1>{cartdata.lastname}</h1>
-              <h1>{cartdata.email}</h1>
-              <h1>{cartdata.city}</h1>
-              <h1>{cartdata.state}</h1>
-              <h1>{cartdata.bank}</h1>
-              <br/>
-              <h1>{cartdata.price}</h1>
-              <h1>{cartdata.name}</h1>
+              <Card style={{width:"600px"}}>
+                  <div style={{padding: "5%"}}>
+                      <CardTitle><h1>Thanh toán đơn hàng</h1></CardTitle>
+                      <CardText>loại tài khoản: {cartdata.name}</CardText>
+                      <CardText>Thành tiền: <h1>{cartdata.price}</h1></CardText>
+                      <br/>
+                      <CardTitle><h1>Thông tin khách hàng</h1></CardTitle>
+                      <CardText>tên: {cartdata.firstname}</CardText>
+                      <CardText>họ: {cartdata.lastname}</CardText>
+                      <CardText>email: {cartdata.email}</CardText>
+                      <CardText>công ty: {cartdata.company}</CardText>
+                      <CardText>thành phố: {cartdata.city}</CardText>
+                      <CardText>bang: {cartdata.state}</CardText>
+                  </div>
+              </Card>
             <Typography className={classes.instructions}>All steps completed</Typography>
             <Form
             onSubmit={onHandleSubmit}
@@ -400,6 +405,12 @@ function validateForm(){
             Checkout
             </button>
             </Form>
+            <Button
+                onClick={handleBack}
+                className={classes.backButton}
+              >
+                Back
+            </Button>
           </Container>
         ) : (
           <div>
