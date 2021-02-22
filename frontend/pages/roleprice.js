@@ -79,20 +79,27 @@ function roleprice(){
     var annual = parseFloat(pSelected*10 / 12).toFixed( 2 );
     const steps = getSteps();
     var check1=0;
+
     //user để skip register
     const { user, setUser } = useContext(AppContext);
 
     let urll;
-    axios.get('/api/createpaymenturl', { params: cartdata })
-        .then(function (result) {
-            urll = result.data.data;
-        });
+    const getPaymentUrl = async () => {
+    try {
+      const response = await axios.get('/api/createpaymenturl', { params: cartdata });
+      urll = response.data.data;
+      router.push(urll)
+      console.log('@getPaymentUrl: ', response.data.data)
+    } catch (err) {
+      console.error('@getPaymentUrl:', err);
+    }
+  }
 
     const onHandleSubmit = (e) => {
     e.preventDefault();
     console.log(cartdata);
-    //getPaymentUrl();
-    router.push(urll);
+    getPaymentUrl();
+    //router.push(urll);
   };
 function getStepContent(stepIndex) {
 

@@ -109,7 +109,7 @@ function test()  {
       </Col>
       <Col md={6}>
       <Grid component="label" container alignItems="center" spacing={1}>
-      <Grid item><h4>CURRENCY</h4></Grid>
+      <Grid item><h3>CURRENCY</h3></Grid>
       <Grid>
         <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
           <option>VN</option>
@@ -122,7 +122,7 @@ function test()  {
       </Grid>
       <br/>
       <Grid component="label" container alignItems="center" spacing={1}>
-      <Grid item><h4>REGION</h4></Grid>
+      <Grid item><h3>REGION</h3></Grid>
       <Grid>
         <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
           <option>VN</option>
@@ -139,7 +139,7 @@ function test()  {
       <Nav tabs>
         <NavItem>
           <NavLink
-            style={{padding: "0.5rem 10rem", fontSize: "18px"}}
+            style={{padding: "0.5rem 10rem", fontSize: "20px"}}
             className={classnames({ active: activeTab === '1' })}
             onClick={() => { toggle('1'); }}
           >
@@ -148,7 +148,7 @@ function test()  {
         </NavItem>
         <NavItem>
           <NavLink
-            style={{padding: "0.5rem 10rem", fontSize: "18px"}}
+            style={{padding: "0.5rem 10rem", fontSize: "20px"}}
             className={classnames({ active: activeTab === '2' })}
             onClick={() => { toggle('2'); }}
           >

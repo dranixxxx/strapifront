@@ -25,6 +25,7 @@
     "recompose": "^0.30.0",
     "sha256": "^0.2.0",
     "strapi": "^3.3.3",
+    "swiper": "^6.4.15",
     "use-between": "^0.0.18"
   },
   "scripts": {

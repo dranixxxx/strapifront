@@ -38,16 +38,14 @@ p{
 .custom-tag {
      max-width: 100%;
      height: 500px;
-     background: black;
 }
 img {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-body{
-    font-family:  arial;
-    padding-top: 172px;
+html, body {
+    font-family: 'Lato','Helvetica','Arial'!important;
 }
 .active.nav-link {
     display: block;
@@ -91,9 +89,144 @@ footer{
 }
 .col-lg-2 a{
     color:#fff!important;
-    font-size: 11px;
+    font-size: 12px;
 }
 .des{
-    font-size: 14px;
+    font-size: 12px;
     font-family:  arial;
+}
+button.dropdown-toggle.btn.btn-secondary {
+    border: none;
+}
+
+/*v6*/
+footer ul a {
+    display: block;
+    margin: 30px 0px 0px 0px;
+}
+
+footer li {
+    margin-top: -6px;
+    margin: -28px 0px;
+}
+
+a.about {
+    padding-bottom: 5px;
+}
+
+a.dow {
+    margin-top: 19px;
+    padding-bottom: 5px;
+}
+
+a.dow1 {
+    margin-top: 25px;
+    padding-bottom: 4px;
+}
+
+span.dow2 {
+    margin-top: 25px;
+    display: block;
+    padding-bottom: 4px;
+}
+
+footer .language .dropdown {
+    background-color: #5a5a5a;
+}
+
+footer .h4.mot {
+    font-size: 12px;
+    margin-top: 25px;
+    margin-left: 37px;
+}
+
+footer button.dropdown-toggle.btn.btn-secondary {
+    border: 1px solid;
+    margin-bottom: 25px;
+    width: 100px;
+    border-radius: 0px;
+    color: #fff;
+    height: 30px;
+    line-height: 15px;
+    margin-top: -5px;
+}
+
+span.cur {
+    margin-top: 30px;
+    display: block;
+    font-size: 12px;
+}
+
+.dropdown-currency.mot.dropdown {
+    color: white;
+    font-size: 12px;
+    border: 1px solid;
+    height: 30px;
+    margin-top: 45px;
+    width: 100px;
+}
+
+.mot a.dropdown-toggle {
+    margin: 0px;
+    padding: 5px 0px;
+    padding-left: 5px;
+}
+
+span.cur {
+    margin-left: 40px;
+}
+
+
+.swiper-container {
+  list-style: none;
+}
+
+.pagination {
+  bottom: 0;
+  padding-bottom: 4px;
+}
+
+.slide {
+  text-align: center;
+  height: 320px;
+  line-height: 320px;
+  background: black;
+  overflow: hidden;
+}
+a.btn.btn-primary{
+    margin-left: 10px;
+}
+a.btn.btn-warning{
+    margin-left: 10px;
+}
+
+
+/**/
+.nav1 {
+    margin-top: -150px;
+}
+
+.hello1{
+    margin-bottom: 150px;
+}
+
+header {
+    /* margin-bottom: 150px; */
+    height: 20px;
+}
+
+.anh{
+    width: 100px;
+    margin-right: 30px;
+}
+.hello {
+    height: 50px;
+    /* background: red; */
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    width: 100%;
+    margin-top: -49px;
+    margin-bottom: 50px;
+    position: fixed;
 }
