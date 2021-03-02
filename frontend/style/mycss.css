@@ -219,6 +219,10 @@ a.btn.btn-warning{
 .hello1{
     margin-bottom: 150px;
 }
+header {
+    /* margin-bottom: 150px; */
+    height: 20px;
+}
 .anh{
     width: 100px;
     margin-right: 30px;
