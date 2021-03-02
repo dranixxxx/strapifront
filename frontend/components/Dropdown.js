@@ -1,57 +1,41 @@
 import React, { useState } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Link from "next/link";
 
-export default class Dropdownn extends React.Component {
-  constructor(props) {
-    super(props);
+const Dropdownn = (props) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    this.toggle = this.toggle.bind(this);
-    this.onMouseEnter = this.onMouseEnter.bind(this);
-    this.onMouseLeave = this.onMouseLeave.bind(this);
-    this.state = {
-      dropdownOpen: false
-    };
-  }
+  const toggle = () => setDropdownOpen(prevState => !prevState);
 
-  toggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
-  }
+  return (
+    <Dropdown isOpen={dropdownOpen} toggle={toggle} >
 
-  onMouseEnter() {
-    this.setState({dropdownOpen: true});
-  }
+      <DropdownToggle caret style={{backgroundColor:"white",marginRight:"10px,backgroundcolor: white"}}>
+       <div style={{fontSize:"16px", float:"left",color:"black",marginRight : '-1px'}}>
+       Dropdown
+       </div>
 
-  onMouseLeave() {
-    this.setState({dropdownOpen: false});
-  }
-
-  render() {
-    return (
-      <Dropdown className="d-inline-block" onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret style={{backgroundColor: "white", color: "black", border: "white", padding:"0px"}}>
-         <a className="navbar-brand">Solution</a>
         </DropdownToggle>
-        <DropdownMenu>
-             <Link href="/test">
-                         <DropdownItem>
-                 <a className="navbar-brand">test</a>
-                             </DropdownItem>
-             </Link>
-             <Link href="/plan">
-                         <DropdownItem>
-                 <a className="navbar-brand">plan</a>
-                             </DropdownItem>
-             </Link>
-             <Link href="/success">
-                         <DropdownItem>
-                 <a className="navbar-brand">success</a>
-                             </DropdownItem>
-             </Link>
-       </DropdownMenu>
-      </Dropdown>
-    );
-  }
+      <DropdownMenu >
+
+            <Link href="/test">
+                        <DropdownItem>
+                <a className="navbar-brand">test</a>
+                            </DropdownItem>
+            </Link>
+            <Link href="/plan">
+                        <DropdownItem>
+                <a className="navbar-brand">plan</a>
+                            </DropdownItem>
+            </Link>
+            <Link href="/success">
+                        <DropdownItem>
+                <a className="navbar-brand">success</a>
+                            </DropdownItem>
+            </Link>
+      </DropdownMenu>
+    </Dropdown>
+  );
 }
+
+export default Dropdownn;
