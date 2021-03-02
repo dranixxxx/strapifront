@@ -11,8 +11,7 @@ function success() {
     useEffect(async() => {
     if (!user) return;
     const token = Cookie.get("token");
-    const res = await axios.put(`http://localhost:1337/users/${user.id}`,
-    //const res = await axios.put(`http://localhost:1337/users/1`,
+    const res = await axios.put(`http://45.64.126.93:1337/users/${user.id}`,
     {
         roleprice: 3,
     },
