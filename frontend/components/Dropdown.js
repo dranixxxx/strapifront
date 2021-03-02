@@ -31,7 +31,7 @@ export default class Dropdownn extends React.Component {
   render() {
     return (
       <Dropdown className="d-inline-block" onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret style={{backgroundColor: "white", color: "black", border: "white"}}>
+        <DropdownToggle caret style={{backgroundColor: "white", color: "black", border: "white", padding:"0px"}}>
          <a className="navbar-brand">Solution</a>
         </DropdownToggle>
         <DropdownMenu>
