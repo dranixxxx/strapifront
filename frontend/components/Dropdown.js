@@ -45,8 +45,11 @@ export default class Dropdownn extends React.Component {
                  <a className="navbar-brand">plan</a>
                              </DropdownItem>
              </Link>
-
-         <DropdownItem>Quo Action</DropdownItem>
+             <Link href="/success">
+                         <DropdownItem>
+                 <a className="navbar-brand">success</a>
+                             </DropdownItem>
+             </Link>
        </DropdownMenu>
       </Dropdown>
     );

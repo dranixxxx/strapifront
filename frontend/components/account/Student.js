@@ -48,7 +48,7 @@ function Student(props){
                 <Col md="6" lg="3" style={{ padding: 0 }} >
             <Card style={{ height: "600px", backgroundColor:"rgba(246,247,249,0.6)"  }}>
         <CardBody>
-            <CardTitle><h6>BASIC</h6></CardTitle>
+            <CardTitle><h7>BASIC</h7></CardTitle>
             <CardText><h6>Personal Meeting</h6></CardText>
             <CardText><h3>Free</h3></CardText>
             <div>
@@ -62,10 +62,10 @@ function Student(props){
         </a>
 
         </div>
-            <CardText>
-                <div className="des">Host up to 100 participants</div>
-                <div className="des">Group meetings for up to 40 minutes</div>
-                <div className="des">Unlimited one-on-one Meetings</div>
+            <CardText style={{marginTop:"20px"}}>
+                <li className="des">Host up to 100 participants</li>
+                <li className="des">Group meetings for up to 40 minutes</li>
+                <li className="des">Unlimited one-on-one Meetings</li>
             </CardText>
 
         </CardBody>
@@ -77,7 +77,7 @@ function Student(props){
             {data.role.roleprices.map((res) =>{
     if (check.checked){
         price = <h3>{(res.price)*10}$<span style={{fontWeight:"normal", fontSize: "16px"}}> /year/license</span></h3>;
-        saving =<b>{(res.price)*2}$ SAVING</b>
+        saving =<h7>{(res.price)*2}$ SAVING</h7>
     } else {
         price = <h3>{(res.price)}$<span style={{fontWeight:"normal", fontSize: "16px"}}> /month/license</span></h3>;
     }
@@ -87,7 +87,7 @@ function Student(props){
 
         <CardBody>
             <div style={{float: "right", color: "white", backgroundColor: "green", textAlign:"center", width: "150px"}}>{saving}</div>
-            <CardTitle><h6>{res.name}</h6></CardTitle>
+            <CardTitle style={{textTransform: "uppercase"}}><h7>{res.name}</h7></CardTitle>
             <CardText><h6>{res.name_des}</h6></CardText>
             <CardText>{price}</CardText>
             <div>
@@ -99,7 +99,17 @@ function Student(props){
             </Link>
 
         </div>
-            <CardText><pre><div className="des">{res.description}</div></pre></CardText>
+            <CardText style={{marginTop:"20px"}}><div className="des">
+            {
+              res.description.split('\n').map(function( item, idx) {
+                return (
+                    <span key={idx}>
+                        <li>{item}</li>
+                    </span>
+                )
+              })
+            }
+            </div></CardText>
 
         </CardBody>
         </Card>
@@ -114,13 +124,6 @@ function Student(props){
     )})}
 
         </Row>
-        <style jsx>
-            {`
-              des{
-                font-size: 14px;
-                }  
-            `}
-        </style>
         </>
 
     );

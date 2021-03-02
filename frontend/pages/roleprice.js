@@ -114,14 +114,14 @@ function getStepContent(stepIndex) {
 
                     <>
                         <Container>
-                            <h1>{roleprice.name}</h1>
+                            <h3 className="textrol">{roleprice.name}</h3>
                             {/*<Steppper/>*/}
-                            <h3>1. How many meeting licenses do you want to purchase?</h3>
-                            <InputGroup style={{width: "300px"}}>
+                            <h5 className="textrol">1. How many meeting licenses do you want to purchase?</h5>
+                            <InputGroup className="rolsel" style={{width: "300px"}}>
                                 <Input placeholder="1" min={1} max={100} type="number" step="1"/>
                             </InputGroup>
-                            <h3>2. Choose plan</h3>
-                            <Row>
+                            <h5 className="textrol">2. Choose plan</h5>
+                            <Row className="rolsel">
                                 {roleprice.discounts.map((res) => {
                                     return(
                                         <Col sm="3" key={res.id}>
@@ -143,8 +143,8 @@ function getStepContent(stepIndex) {
 
                             </Row>
 
-                            <h3>3. Choose cycle</h3>
-                            <Row>
+                            <h5 className="textrol">3. Choose cycle</h5>
+                            <Row className="rolsel">
                                 <Col sm="3">
                                     <div className="card1">
 

@@ -94,7 +94,7 @@ function test()  {
       <p>Find the right solution for your needs.</p>
       <div className="switchstyle">
       <Row>
-      <Col md={6}>
+      <div className="billsect">
       <Grid component="label" container alignItems="center" spacing={1}>
       <Grid item>Billed monthly</Grid>
       <Grid>
@@ -106,10 +106,10 @@ function test()  {
       </Grid>
       <Grid item>Billed anually</Grid>
       </Grid>
-      </Col>
-      <Col md={6}>
-      <Grid component="label" container alignItems="center" spacing={1}>
-      <Grid item><h3>CURRENCY</h3></Grid>
+      </div>
+      <div className="billsect">
+      <Grid component="label" container alignItems="center" spacing={1} style={{margin: "5px 0px 5px 0px"}}>
+      <Grid item><h4>CURRENCY</h4></Grid>
       <Grid>
         <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
           <option>VN</option>
@@ -120,9 +120,8 @@ function test()  {
         </Input>
       </Grid>
       </Grid>
-      <br/>
-      <Grid component="label" container alignItems="center" spacing={1}>
-      <Grid item><h3>REGION</h3></Grid>
+      <Grid component="label" container alignItems="center" spacing={1} style={{margin: "5px 0px 5px 0px"}}>
+      <Grid item><h4>REGION</h4></Grid>
       <Grid>
         <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
           <option>VN</option>
@@ -133,7 +132,7 @@ function test()  {
         </Input>
       </Grid>
       </Grid>
-      </Col>
+      </div>
       </Row>
       </div>
       <Nav tabs>

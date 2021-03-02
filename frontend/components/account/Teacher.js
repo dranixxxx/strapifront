@@ -50,7 +50,7 @@ function Teacher(props){
             {data.role.roleprices.map((res) => {
     if (check.checked){
         price = <h3>{(res.price)*10}$<span style={{fontWeight:"normal", fontSize: "16px"}}> /year/license</span></h3>;
-        saving =<b>{(res.price)*2}$ SAVING</b>
+        saving =<h7>{(res.price)*2}$ SAVING</h7>
     } else {
         price = <h3>{(res.price)}$<span style={{fontWeight:"normal", fontSize: "16px"}}> /month/license</span></h3>;
     }
@@ -59,7 +59,7 @@ function Teacher(props){
             <Card style={{ height: "600px" }} className={"hoa"+res.id}>
         <CardBody>
             <div style={{float: "right", color: "white", backgroundColor: "green", textAlign:"center", width: "150px"}}>{saving}</div>
-            <CardTitle><h6>{res.name}</h6></CardTitle>
+            <CardTitle style={{textTransform: "uppercase"}}><h7>{res.name}</h7></CardTitle>
             <CardText><h6>{res.name_des}</h6></CardText>
             <CardText>{price}</CardText>
             <div>
@@ -71,7 +71,17 @@ function Teacher(props){
             </Link>
 
         </div>
-            <CardText><li>{res.description}</li></CardText>
+            <CardText style={{marginTop:"20px"}}><div className="des">
+            {
+              res.description.split('\n').map(function( item, idx) {
+                return (
+                    <span key={idx}>
+                        <li>{item}</li>
+                    </span>
+                )
+              })
+            }
+            </div></CardText>
 
         </CardBody>
         </Card>

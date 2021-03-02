@@ -34,12 +34,11 @@ function get(req, res) {
 	const createDate = moment(date).format('yyyyMMDDHHmmss');
 	const orderId = moment(date).format('HHmmss');
 	var amount = req.query.price;
-	var bankCode = 'NCB';
+	var bankCode = req.query.bank;
 	var orderInfo = req.query.firstname;
 	var locale = 'vn';
 	var currCode = 'VND';
 	var vnp_Params = {};
-	var orderInfo = req.query.lastname;
 
 	vnp_Params['vnp_Version'] = '2';
 	vnp_Params['vnp_Command'] = 'pay';
