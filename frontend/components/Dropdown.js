@@ -10,10 +10,8 @@ const Dropdownn = (props) => {
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle} >
 
-      <DropdownToggle caret style={{backgroundColor:"white",marginRight:"10px,backgroundcolor: white"}}>
-       <div style={{fontSize:"16px", float:"left",color:"black",marginRight : '-1px'}}>
-       Dropdown
-       </div>
+      <DropdownToggle caret style={{backgroundColor: "white", color: "black", border: "white", padding:"0px",fontSize:"16px"}}>
+         <a className="navbar-brand" style={{fontSize:"16px"}}>Solution</a>
 
         </DropdownToggle>
       <DropdownMenu >
