@@ -406,19 +406,13 @@ function validateForm(){
                   </div>
               </Card>
             <Typography className={classes.instructions}>All steps completed</Typography>
-            <Form
-            onSubmit={onHandleSubmit}
-            >
-            <button type="submit" className="btn btn-primary">
-            Checkout
-            </button>
-            </Form>
             <Button
                 onClick={handleBack}
                 className={classes.backButton}
               >
                 Back
             </Button>
+            <Button onClick={onHandleSubmit} color="primary">Complete</Button>
           </Container>
         ) : (
           <div>
