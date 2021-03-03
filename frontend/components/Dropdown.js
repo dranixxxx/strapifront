@@ -6,9 +6,11 @@ const Dropdownn = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
+  const onMouseEnter = () => setDropdownOpen(true);
+  const onMouseLeave = () => setDropdownOpen(false);
 
   return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle} >
+    <Dropdown isOpen={dropdownOpen} toggle={toggle} onMouseOver={onMouseEnter} onMouseLeave={onMouseLeave}>
 
       <DropdownToggle caret style={{backgroundColor: "white", color: "black", border: "white", padding:"0px",fontSize:"16px"}}>
          <a className="navbar-brand" style={{fontSize:"16px"}}>Solution</a>

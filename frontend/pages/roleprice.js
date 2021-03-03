@@ -70,7 +70,7 @@ function roleprice(){
     const { loading, error, data } = useQuery(GET_TK, {
         variables: { id: router.query.id },
     });
-    const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "",bank:"VCB" });
+    const [cartdata, setcart] = React.useState({ firstname: "", lastname: "", email: "", city: "", state: "", price: "", name: "",bank:"NCB" });
     const [activeStep, setActiveStep] = React.useState(0);
     const [cSelected, setcSelected] = React.useState(null);
     const classes = useStyles();
@@ -301,6 +301,7 @@ function getStepContent(stepIndex) {
                                     // return Object.assign({}, prevState, { message: val }); // Also works
                                   });
                                 }}>
+                              <option>NCB</option>
                               <option>VCB</option>
                               <option>VNPAYQR</option>
                               <option>VISA</option>
