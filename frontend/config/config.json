@@ -2,5 +2,5 @@
   "vnp_TmnCode":"2XX73AXS",
   "vnp_HashSecret":"ZVVMPMOKPNVWTTDREYNJHEEEMSMUJFNT",
   "vnp_Url":"http://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
-  "vnp_ReturnUrl": "http://localhost:3000/success"
+  "vnp_ReturnUrl": "http://45.64.126.93:3000/success"
 }
