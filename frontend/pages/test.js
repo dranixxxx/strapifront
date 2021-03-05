@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col,Container,Table,Input } from 'reactstrap';
 import classnames from 'classnames';
-import Teacher from "../components/Account/Teacher";
-import Student from "../components/Account/Student";
+import Teacher from "../components/account/Teacher";
+import Student from "../components/account/Student";
 import Switch from "@material-ui/core/Switch";
 import Grid from '@material-ui/core/Grid';
 import { useBetween } from "use-between";
