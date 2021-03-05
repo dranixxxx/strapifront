@@ -40,14 +40,13 @@ function Teacher(props){
     const {check} = useBetween(Switchh);
 
     //else
-    const appContext = useContext(AppContext);
     const { loading, error, data } = useQuery(GET_TK);
     if (error) return "Error loading";
     if (loading) return <h1>Fetching</h1>;
     return(
         <>
-            <Row>
-            {data.role.roleprices.map((res) => {
+            <Row className="tabpaner">
+            {data.role.roleprices.map((res) =>{
     if (check.checked){
         price = <h3>{(res.price)*10}$<span style={{fontWeight:"normal", fontSize: "16px"}}> /year/license</span></h3>;
         saving =<h7>{(res.price)*2}$ SAVING</h7>
@@ -56,7 +55,8 @@ function Teacher(props){
     }
     return(
                     <Col md="6" lg="3" style={{ padding: 0 }} key={res.id}>
-            <Card style={{ height: "600px" }} className={"hoa"+res.id}>
+            <div style={{ height: "600px"}} className={"hoa"+res.id}>
+
         <CardBody>
             <div style={{float: "right", color: "white", backgroundColor: "green", textAlign:"center", width: "150px"}}>{saving}</div>
             <CardTitle style={{textTransform: "uppercase"}}><h7>{res.name}</h7></CardTitle>
@@ -71,24 +71,25 @@ function Teacher(props){
             </Link>
 
         </div>
-            <CardText style={{marginTop:"20px"}}><div className="des">
+            <CardText style={{marginTop:"20px"}}>
             {
               res.description.split('\n').map(function( item, idx) {
                 return (
                     <span key={idx}>
-                        <li>{item}</li>
+                        <li className="des">{item}</li>
                     </span>
                 )
               })
             }
-            </div></CardText>
+            </CardText>
 
         </CardBody>
-        </Card>
+        </div>
         <style>
             {`    
             .hoa4{
             background:rgba(246,247,249,0.6);
+            border-radius: 1.25rem 0 0 1.25rem;
             }
             .hoa6{
             background:rgba(246,247,249,0.6);

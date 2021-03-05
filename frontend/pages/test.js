@@ -1,22 +1,8 @@
 import React, { useState } from 'react';
-import {
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  Col,
-  Container,
-  Table,
-  Label,
-  Input,
-  Form,
-  FormGroup
-} from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col,Container,Table,Input } from 'reactstrap';
 import classnames from 'classnames';
-import Teacher from "../components/account/Teacher";
-import Student from "../components/account/Student";
+import Teacher from "../components/Account/Teacher";
+import Student from "../components/Account/Student";
 import Switch from "@material-ui/core/Switch";
 import Grid from '@material-ui/core/Grid';
 import { useBetween } from "use-between";
@@ -94,7 +80,7 @@ function test()  {
       <p>Find the right solution for your needs.</p>
       <div className="switchstyle">
       <Row>
-      <div className="billsect">
+      <div className="bill1">
       <Grid component="label" container alignItems="center" spacing={1}>
       <Grid item>Billed monthly</Grid>
       <Grid>
@@ -107,31 +93,27 @@ function test()  {
       <Grid item>Billed anually</Grid>
       </Grid>
       </div>
+      <div className="bill2">
       <div className="billsect">
-      <Grid component="label" container alignItems="center" spacing={1} style={{margin: "5px 0px 5px 0px"}}>
-      <Grid item><h4>CURRENCY</h4></Grid>
-      <Grid>
-        <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
+        <span className="billsecttext">CURRENCY</span>
+        <Input type="select" name="select" id="exampleSelect" className="billsectinput">
           <option>VN</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
         </Input>
-      </Grid>
-      </Grid>
-      <Grid component="label" container alignItems="center" spacing={1} style={{margin: "5px 0px 5px 0px"}}>
-      <Grid item><h4>REGION</h4></Grid>
-      <Grid>
-        <Input type="select" name="select" id="exampleSelect" style={{width: "300px"}}>
+      </div>
+      <div className="billsect">
+        <span className="billsecttext">REGION</span>
+        <Input type="select" name="select" id="exampleSelect" className="billsectinput">
           <option>VN</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
         </Input>
-      </Grid>
-      </Grid>
+      </div>
       </div>
       </Row>
       </div>
@@ -173,9 +155,10 @@ function test()  {
       </TabContent>
     </div>
 
+    <div style={{margin: "0 50px 50px 50px"}}>
       <h1>Plan comparision</h1>
       <Table striped bordered hover size="sm">
-  <thead>
+      <thead>
     <tr>
       <th> </th>
       <th>BASIC</th>
@@ -184,7 +167,7 @@ function test()  {
       <th>ENTERPRISE</th>
     </tr>
   </thead>
-  <tbody>
+      <tbody>
     <tr>
       <td>Participant Capacity</td>
       <td>100</td>
@@ -207,7 +190,9 @@ function test()  {
       <td>Ticket,Live Chat, & Phone</td>
     </tr>
   </tbody>
-</Table>
+      </Table>
+    </div>
+
   </>
   );
 }

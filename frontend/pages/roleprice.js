@@ -57,8 +57,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 function getSteps() {
   return ['Configure products', 'Create account', 'Payment'];
 }

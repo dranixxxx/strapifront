@@ -44,9 +44,9 @@ function Student(props){
     if (loading) return <h1>Fetching</h1>;
     return(
         <>
-            <Row>
+            <Row className="tabpaner">
                 <Col md="6" lg="3" style={{ padding: 0 }} >
-            <Card style={{ height: "600px", backgroundColor:"rgba(246,247,249,0.6)"  }}>
+            <div style={{ height: "600px", backgroundColor:"rgba(246,247,249,0.6)", borderRadius: "1.25rem 0 0 1.25rem"  }}>
         <CardBody>
             <CardTitle><h7>BASIC</h7></CardTitle>
             <CardText><h6>Personal Meeting</h6></CardText>
@@ -62,16 +62,16 @@ function Student(props){
         </a>
 
         </div>
-            <CardText style={{marginTop:"20px"}}>
+            <ul style={{marginTop:"20px"}}>
                 <li className="des">Host up to 100 participants</li>
                 <li className="des">Group meetings for up to 40 minutes</li>
                 <li className="des">Unlimited one-on-one Meetings</li>
-            </CardText>
+            </ul>
 
         </CardBody>
 
 
-        </Card>
+        </div>
         </Col>
 
             {data.role.roleprices.map((res) =>{
@@ -83,7 +83,7 @@ function Student(props){
     }
     return(
                     <Col md="6" lg="3" style={{ padding: 0 }} key={res.id}>
-            <Card style={{ height: "600px"}} className={"hoa"+res.id}>
+            <div style={{ height: "600px"}} className={"hoa"+res.id}>
 
         <CardBody>
             <div style={{float: "right", color: "white", backgroundColor: "green", textAlign:"center", width: "150px"}}>{saving}</div>
@@ -99,20 +99,20 @@ function Student(props){
             </Link>
 
         </div>
-            <CardText style={{marginTop:"20px"}}><div className="des">
+            <CardText style={{marginTop:"20px"}}>
             {
               res.description.split('\n').map(function( item, idx) {
                 return (
                     <span key={idx}>
-                        <li>{item}</li>
+                        <li className="des">{item}</li>
                     </span>
                 )
               })
             }
-            </div></CardText>
+            </CardText>
 
         </CardBody>
-        </Card>
+        </div>
         <style>
             {`    
             .hoa2{
@@ -130,5 +130,4 @@ function Student(props){
 
 
 }
-
     export default Student;
