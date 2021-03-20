@@ -3,7 +3,7 @@
 import React, { useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { Container, Nav, NavItem } from "reactstrap";
+import { Container, Nav, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem} from "reactstrap";
 import { logout } from "../lib/auth";
 import AppContext from "../context/AppContext";
 import Popoverr from "../components/Popover";
@@ -97,7 +97,17 @@ const Layout = (props) => {
 </NavItem>
         <NavItem>
         {user ? (
-                    <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> {user.username}</a>
+                    <a className="nav-link">
+                        <UncontrolledDropdown>
+                          <DropdownToggle caret style={{backgroundColor: "white", color: "red", border: "white", padding:"0px",fontSize:"16px"}}>
+                              {user.username}
+                          </DropdownToggle>
+                          <DropdownMenu>
+                            <DropdownItem >{user.role.name}</DropdownItem>
+                            <DropdownItem >{user.roleprice.name}</DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </a>
 
 ) : (
     <Link href="/register">
