@@ -104,7 +104,7 @@ const Layout = (props) => {
                           </DropdownToggle>
                           <DropdownMenu>
                             <DropdownItem >{user.role.name}</DropdownItem>
-                            <DropdownItem >{user.roleprice.name}</DropdownItem>
+                            {/*<DropdownItem >{user.roleprice.name}</DropdownItem>*/}
                           </DropdownMenu>
                         </UncontrolledDropdown>
                     </a>
