@@ -57,12 +57,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 function getSteps() {
   return ['Configure products', 'Create account', 'Payment'];
 }
 
 
-function roleprice(){
+export default function roleprice(){
     const appContext = useContext(AppContext);
     const router = useRouter();
     const { loading, error, data } = useQuery(GET_TK, {
@@ -74,10 +76,9 @@ function roleprice(){
     const classes = useStyles();
     const [pSelected, setPSelected] = React.useState(null);
     var monthly = pSelected*1;
-    var annual = parseFloat(pSelected*10 / 12).toFixed( 2 );
+    var annual = parseInt(pSelected*10 / 12);
     const steps = getSteps();
     var check1=0;
-
     //user để skip register
     const { user, setUser } = useContext(AppContext);
 
@@ -99,6 +100,37 @@ function roleprice(){
     getPaymentUrl();
     //router.push(urll);
   };
+
+     const handleNext = () => {
+    if (activeStep===2) {
+       validateForm();
+        if (check1==12) {
+setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
+    //cần làm sạch code
+    }else {
+        if (user && activeStep === 0) {
+            if (cartdata.price==0){
+            alert('Bạn chưa nhập mặt hàng');
+            }
+            else {
+                setActiveStep((prevActiveStep) => prevActiveStep + 2);
+            }
+        } else {
+            if (cartdata.price==0){
+            alert('Bạn chưa nhập mặt hàng');
+            }
+            else {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            }
+        }
+    }
+};
+
+     const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+     };
+
 function getStepContent(stepIndex) {
 
         switch (stepIndex) {
@@ -315,36 +347,6 @@ function getStepContent(stepIndex) {
         }
 }
 
-  const handleNext = () => {
-    if (activeStep===2) {
-       validateForm();
-        if (check1==12) {
-setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        }
-    //cần làm sạch code
-    }else {
-        if (user && activeStep === 0) {
-            if (cartdata.price==0){
-            alert('Bạn chưa nhập mặt hàng');
-            }
-            else {
-                setActiveStep((prevActiveStep) => prevActiveStep + 2);
-            }
-        } else {
-            if (cartdata.price==0){
-            alert('Bạn chưa nhập mặt hàng');
-            }
-            else {
-                setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            }
-        }
-    }
-};
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
 function validateForm(){
       var firstname = document.getElementById('firstname').value;
       var lastname = document.getElementById('lastname').value;
@@ -404,13 +406,18 @@ function validateForm(){
                   </div>
               </Card>
             <Typography className={classes.instructions}>All steps completed</Typography>
-            <Button
+             <Button
                 onClick={handleBack}
                 className={classes.backButton}
               >
                 Back
             </Button>
             <Button onClick={onHandleSubmit} color="primary">Complete</Button>
+            <Link href="/checkout"><Button
+                outline
+                color="primary"
+                onClick={() => appContext.addItem(cartdata)}>
+                test</Button></Link>
           </Container>
         ) : (
           <div>
@@ -434,5 +441,3 @@ function validateForm(){
     </div>
   );
 }
-
-    export default roleprice;

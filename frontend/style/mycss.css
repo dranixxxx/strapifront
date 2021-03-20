@@ -272,3 +272,235 @@ header {
 .navbar-brand{
     font-size: 16px;
 }
+
+.solution{
+    text-align: center;
+}
+
+.panel {
+    /*margin-bottom: 20px;*/
+    /*background-color: #fff;*/
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.panel.panel-primary {
+    height: 140px;
+}
+span.mothang {
+    display: inline-block;
+    border: 1px solid;
+    width: 100px;
+    height: 100px;
+    line-height: 80px;
+    border-radius: 50%;
+    background: #5a5a5a;
+     margin-left: 120px;
+}
+.nholai{
+    width: 50px;
+    align-items: center;
+}
+.gartner {
+    margin: 0 auto;
+    text-align: center;
+}
+.ngan {
+    width: 70px;
+    height: 4px;
+    background: red;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+.clearfix {
+    margin-left: 30px;
+}
+
+/*.rrr*/
+body,html{
+  overflow-x: hidden;
+}
+.container-fluid.rrr {
+    margin: 60px 50px;
+}
+
+.rrr .logo{
+    text-align: center;
+    margin:0 auto;
+    margin-bottom: 70px;
+
+}
+
+.rrr .news-item {
+    padding-bottom: 76px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 18px rgb(0 0 0 20%);
+}
+
+.rrr .gartner {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.rrr .stars img {
+    margin: 0 auto;
+    width: 100px;
+    text-align: center;
+
+}
+
+.rrr p.desc1 {
+    font-size: 16px;
+    padding-top: 20px;
+    padding-bottom: 25px;
+}
+
+.rrr img.img-responsive {
+    padding-top: 20px;
+
+
+}
+
+.ngan {
+    width: 70px;
+    height: 4px;
+    background: red;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+a.btn-cta.cta-bg.cta-bgwhite.learn-more {
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    border: 1px solid;
+    display: block;
+    line-height: 40px;
+    border-radius: 10px;
+    margin: 70px 0px;
+}
+
+.container.anh42 {
+
+    margin-top: 90px;
+    margin-bottom: 90px;
+}
+
+.anh43 .brand-list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+}
+
+.anh43 .col{
+    flex-grow: none;
+
+}
+.anh43 .left-part{
+
+}
+
+.anh43 .brand .brand--image{
+    background-color: white;
+    padding: 100px 40px;
+    border: 2px solid #babacc;
+    height: 280px;
+}
+
+.anh43 .left-part img{
+   width: 100%;
+   height: 280px;
+}
+
+.btn-list .btn{
+    width: 200px;
+    border: 1px solid #babacc;
+    min-width: 200px;
+    font-size: 18px;
+    height: 48px;
+    line-height: 35px;
+    margin-bottom: 170px;
+    margin-top: 182px!important;
+}
+
+/* slide */
+.nholai{
+    width: 50px;
+}
+
+.ngan.mot1 {
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.theh3 {
+    font-size: 30px;
+    padding-top: 100px;
+}
+
+.panel.panel-primary {
+    background: white;
+    border: none;
+}
+
+.panel.panel-primary {
+    margin-left: -900px;
+}
+
+span.mothang {
+    display: inline-block;
+    border: 1px solid;
+    width: 100px;
+    height: 100px;
+    line-height: 80px;
+    border-radius: 50%;
+    background: #5a5a5a;
+     margin-left: 120px;
+}
+
+.panel-body {
+    margin-left: 450px;
+    margin-bottom: 100px;
+}
+
+div#content {
+    margin-top: 100px;
+}
+
+img.nholai {
+    padding-top: 20px;
+}
+
+.nganmot1 {
+    width: 60%;
+    border: 2px dashed #b1154a;
+   position: relative;
+   top: 70px;
+    margin-top: 75px;
+}
+
+.panel-body {
+    margin-left: 450px;
+    margin-bottom: 100px;
+    position: relative;
+}
+
+
+.mothang p {
+    width: 200px;
+    margin-left: -50px;
+}
+
+.MuiPaper-root.MuiStepper-root.MuiStepper-horizontal.MuiStepper-alternativeLabel.MuiPaper-elevation0 {
+    position: fixed;
+    width: 100%;
+    z-index: 13;
+    margin-top: -100px;
+    padding-top: 100px;
+}
