@@ -275,6 +275,7 @@ header {
 
 .solution{
     text-align: center;
+    padding-top:200px;
 }
 
 .panel {
@@ -282,6 +283,7 @@ header {
     /*background-color: #fff;*/
     border: 1px solid transparent;
     border-radius: 4px;
+    padding-top:10px;
 }
 
 .panel-body {
