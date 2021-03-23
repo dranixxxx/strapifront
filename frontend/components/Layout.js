@@ -90,10 +90,10 @@ const Layout = (props) => {
         </NavItem>
         <NavItem>
                 {(user && user.role.id===1) ? (
-                    <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> vào lớp học</a>
+                    <a href="http://45.64.126.93:3001" target="_blank" rel="noopener noreferrer" className="nav-link"> quản lí lớp học</a>
 
 ) : ((user && user.role.id===2) ? (
-                    <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> vào</a>
+                    <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> vào lớp học</a>
 ) : (null))}
 
 </NavItem>
