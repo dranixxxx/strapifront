@@ -89,10 +89,12 @@ const Layout = (props) => {
                      <NavItem className="ml-auto">
         </NavItem>
         <NavItem>
-        {user ? (
+                {(user && user.role.id===1) ? (
                     <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> vào lớp học</a>
 
-) : (null)}
+) : ((user && user.role.id===2) ? (
+                    <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> vào</a>
+) : (null))}
 
 </NavItem>
         <NavItem>
