@@ -11,7 +11,7 @@ function success() {
     useEffect(async() => {
     if (!user) return;
     const token = Cookie.get("token");
-    const res = await axios.put(`http://45.64.126.93:1337/users/${user.id}`,
+    const res = await axios.put(`http://edunet.tranonline.ml/api/user/public/${user._id}`,
     {
         roleprice: 3,
     },
@@ -29,7 +29,7 @@ console.log("success")
         <>
             <div className="texctr">
             {user ? (
-                        <div> {user.username} đã mua tài khoản thành công</div>
+                        <div> {user.name} đã mua tài khoản thành công</div>
             ) : (null)}
             <Link href="/">quay trở về trang chủ</Link>
             </div>

@@ -16,7 +16,7 @@ import { login } from "../lib/auth";
 import AppContext from "../context/AppContext";
 
 function Login(props) {
-    const [data, updateData] = useState({ identifier: "", password: "" });
+    const [data, updateData] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const router = useRouter();
@@ -86,7 +86,7 @@ function Login(props) {
     color="primary"
     onClick={() => {
         setLoading(true);
-        login(data.identifier, data.password)
+        login(data.email, data.password)
             .then((res) => {
                 setLoading(false);
                 // set authed User in global context to update header/app state

@@ -16,7 +16,7 @@ import { registerUser } from "../lib/auth";
 import AppContext from "../context/AppContext";
 
 const Register = () => {
-    const [data, setData] = useState({ email: "", username: "", password: "" });
+    const [data, setData] = useState({ email: "", name: "", password: "", role:"STUDENT" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState({});
     const appContext = useContext(AppContext);
@@ -46,15 +46,15 @@ const Register = () => {
         <Form>
         <fieldset disabled={loading}>
         <FormGroup>
-        <Label>Username:</Label>
+        <Label>Name:</Label>
     <Input
     disabled={loading}
     onChange={(e) =>
-    setData({ ...data, username: e.target.value })
+    setData({ ...data, name: e.target.value })
 }
-    value={data.username}
+    value={data.name}
     type="text"
-    name="username"
+    name="name"
     style={{ height: 50, fontSize: "1.2em" }}
     />
     </FormGroup>
@@ -82,6 +82,21 @@ const Register = () => {
     style={{ height: 50, fontSize: "1.2em" }}
     />
     </FormGroup>
+    <FormGroup style={{ marginBottom: 30 }}>
+    <Label>Role:</Label>
+    <Input
+    onChange={(e) =>
+    setData({ ...data, role: e.target.value })
+}
+    value={data.role}
+    type="select"
+    name="role"
+    style={{ height: 50, fontSize: "1.2em" }}
+    >
+    <option>STUDENT</option>
+    <option>TEACHER</option>
+    </Input>
+    </FormGroup>
     <FormGroup>
     <span>
     <a href="">
@@ -94,14 +109,15 @@ const Register = () => {
     disabled={loading}
     onClick={() => {
         setLoading(true);
-        registerUser(data.username, data.email, data.password)
+         registerUser(data.name, data.email, data.password, data.role)
+        //registerUser(data)
             .then((res) => {
                 // set authed user in global context object
                 appContext.setUser(res.data.user);
                 setLoading(false);
             })
             .catch((error) => {
-                setError(error.response.data);
+                setError(error.response.success);
                 setLoading(false);
             });
     }}

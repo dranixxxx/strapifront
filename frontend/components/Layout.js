@@ -89,10 +89,10 @@ const Layout = (props) => {
                      <NavItem className="ml-auto">
         </NavItem>
         <NavItem>
-                {(user && user.role.id===1) ? (
+                {(user && user.role==="TEACHER") ? (
                     <a href="http://45.64.126.93:3001" target="_blank" rel="noopener noreferrer" className="nav-link"> quản lí lớp học</a>
 
-) : ((user && user.role.id===2) ? (
+) : ((user && user.role==="STUDENT") ? (
                     <a href="http://45.64.126.93:3006" target="_blank" rel="noopener noreferrer" className="nav-link"> vào lớp học</a>
 ) : (null))}
 
@@ -102,10 +102,10 @@ const Layout = (props) => {
                     <a className="nav-link">
                         <UncontrolledDropdown>
                           <DropdownToggle caret style={{backgroundColor: "white", color: "red", border: "white", padding:"0px",fontSize:"16px"}}>
-                              {user.username}
+                              {user.name}
                           </DropdownToggle>
                           <DropdownMenu>
-                            <DropdownItem >{user.role.name}</DropdownItem>
+                            <DropdownItem >{user.role}</DropdownItem>
                             {/*<DropdownItem >{user.roleprice.name}</DropdownItem>*/}
                           </DropdownMenu>
                         </UncontrolledDropdown>

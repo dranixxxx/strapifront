@@ -32,7 +32,7 @@ class MyApp extends App {
         }
         if (token) {
             // authenticate the token on the server and place set user object
-            fetch("http://45.64.126.93:1337/users/me", {
+            fetch("http://edunet.tranonline.ml/api/user/public/", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

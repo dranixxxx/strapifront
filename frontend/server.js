@@ -31,7 +31,7 @@ app.prepare()
 
         server.listen(process.env.PORT || 3000, err => {
             if (err) throw err;
-            console.log("> Ready on http://localhost:3000");
+            console.log("> Ready on http://45.64.126.93:3000");
         });
     })
     .catch((ex) => {

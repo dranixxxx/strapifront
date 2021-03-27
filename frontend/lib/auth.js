@@ -5,17 +5,17 @@ import Router from "next/router";
 import Cookie from "js-cookie";
 import axios from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://edunet.tranonline.ml";
 
 //register a new user
-export const registerUser = (username, email, password) => {
+export const registerUser = (name, email, password, role) => {
     //prevent function from being ran on the server
     if (typeof window === "undefined") {
         return;
     }
     return new Promise((resolve, reject) => {
         axios
-            .post(`${API_URL}/auth/local/register`, { username, email, password })
+            .post(`${API_URL}/api/auth/register/`, { name, email, password, role })
             .then((res) => {
                 //set token response from Strapi for server validation
                 Cookie.set("token", res.data.jwt);
@@ -32,7 +32,7 @@ export const registerUser = (username, email, password) => {
     });
 };
 
-export const login = (identifier, password) => {
+export const login = (email, password) => {
     //prevent function from being ran on the server
     if (typeof window === "undefined") {
         return;
@@ -40,7 +40,7 @@ export const login = (identifier, password) => {
 
     return new Promise((resolve, reject) => {
         axios
-            .post(`${API_URL}/auth/local/`, { identifier, password })
+            .post(`${API_URL}/api/auth/login/`, { email, password })
             .then((res) => {
                 //set token response from Strapi for server validation
                 Cookie.set("token", res.data.jwt);
