@@ -32,7 +32,7 @@ class MyApp extends App {
         }
         if (token) {
             // authenticate the token on the server and place set user object
-            fetch("http://edunet.tranonline.ml/api/user/public/", {
+            fetch("http://edunet.tranonline.ml/api/user/info", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -45,7 +45,7 @@ class MyApp extends App {
                     return null;
                 }
                 const user = await res.json();
-                this.setUser(user);
+                this.setUser(user.data);
             });
         }
     }
@@ -122,7 +122,7 @@ class MyApp extends App {
     };
     render() {
         const { Component, pageProps } = this.props;
-
+        console.log(this.state.user)
         return (
             <AppContext.Provider
         value={{

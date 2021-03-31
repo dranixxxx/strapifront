@@ -282,6 +282,7 @@ function getStepContent(stepIndex) {
                             <FormGroup>
                             <Label for="company">Company/Organization Name</Label>
                             <Input type="text"  id="company" />
+                            
                           </FormGroup>
                             <FormGroup>
                             <Label for="address">Address</Label>

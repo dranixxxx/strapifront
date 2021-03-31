@@ -61,7 +61,7 @@ function Login(props) {
         <Label>Email:</Label>
     <Input
     onChange={(event) => onChange(event)}
-    name="identifier"
+    name="email"
     style={{ height: 50, fontSize: "1.2em" }}
     />
     </FormGroup>
@@ -90,13 +90,14 @@ function Login(props) {
             .then((res) => {
                 setLoading(false);
                 // set authed User in global context to update header/app state
-                appContext.setUser(res.data.user);
+                appContext.setUser(res.data.data);
             })
             .catch((error) => {
                 setError(error.response.data);
                 setLoading(false);
             });
     }}
+
 >
     {loading ? "Loading... " : "Submit"}
 </Button>
